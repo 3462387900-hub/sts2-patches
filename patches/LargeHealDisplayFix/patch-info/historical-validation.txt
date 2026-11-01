@@ -1,0 +1,8 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS original overflow reproduced at 24375097500000.0.
+PASS installed Hextech coefficients and actual Creature.HealInternal: huge request safely caps at MaxHp.
+PASS normal values, fractions, Int32 boundaries and 4 cultures match original display.
+PASS actual NHealNumVfx.Create IL: exactly four display instructions replaced; other code unchanged.
+PASS executed Harmony patch: huge heal, decimal extremes and fractional truncation.
+[LargeHealDisplayFix] v1.0.0 ready: NHealNumVfx formats decimal healing without Int32 overflow; gameplay unchanged.
+PASS 59 assertions; actual game method patched and unpatched in isolated test process.

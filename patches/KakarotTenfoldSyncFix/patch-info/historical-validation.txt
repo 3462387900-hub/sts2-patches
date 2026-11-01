@@ -1,0 +1,6 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+[KakarotTenfoldSyncFix] v1.0.0 ready: Tenfold repeats use a pre-play hand snapshot, independent of UI refresh.
+PASS original host/client mismatch reproduced; all 4 neighbor combinations agree after fix despite opposite UI caches.
+PASS hand edges and non-hand autoplay do not reuse stale conditions.
+PASS nested/repeated play scopes and async exception cleanup.
+PASS 37 assertions; actual game and Kakarot methods patched/unpatched in isolated process.

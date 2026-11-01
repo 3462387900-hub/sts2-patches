@@ -1,0 +1,19 @@
+{
+  "version": "1.1.0",
+  "min_game_version": "0.111.0",
+  "affects_gameplay": true,
+  "dependencies": [
+    {
+      "id": "YuWanCard"
+    },
+    {
+      "id": "CznTipheraCharacter"
+    }
+  ],
+  "name": "博士猪猪奖励兼容修复",
+  "has_dll": true,
+  "author": "Local compatibility fixes",
+  "description": "修复博士猪猪事件和类猪体出牌奖励的 Tiphera 牌池冲突。",
+  "id": "DoctorPigRewardFix",
+  "has_pck": false
+}

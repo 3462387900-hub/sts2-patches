@@ -1,0 +1,749 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "const": "./patch.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "publication_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "withdrawn"
+      ]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "single_mod_bug",
+            "mod_conflict",
+            "game_api_compat",
+            "patch_compat",
+            "display_error",
+            "other"
+          ]
+        },
+        "symptoms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "trigger_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "diagnosis": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "confidence": {
+              "type": "string",
+              "enum": [
+                "confirmed",
+                "partial",
+                "suspected",
+                "unknown"
+              ]
+            },
+            "conclusion": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 0
+            }
+          },
+          "required": [
+            "confidence",
+            "conclusion",
+            "evidence"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "symptoms",
+        "trigger_conditions",
+        "diagnosis"
+      ]
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "mod_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "affected",
+              "trigger",
+              "dependency",
+              "companion"
+            ]
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "mod_id",
+          "display_name",
+          "role",
+          "explanation"
+        ]
+      },
+      "minItems": 1
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profile_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$"
+              },
+              "game_version_display": {
+                "type": "string",
+                "minLength": 1
+              },
+              "game_files": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "relative_path": {
+                      "type": "string",
+                      "pattern": "^(?![A-Za-z]:)(?![/\\\\])(?!.*(?:^|[/\\\\])\\.\\.(?:[/\\\\]|$))[^\\x00]+$"
+                    },
+                    "sha256": {
+                      "type": "string",
+                      "pattern": "^[A-Fa-f0-9]{64}$"
+                    }
+                  },
+                  "required": [
+                    "relative_path",
+                    "sha256"
+                  ]
+                },
+                "minItems": 1
+              },
+              "required_mods": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "mod_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "version_display": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "relative_path": {
+                            "type": "string",
+                            "pattern": "^(?![A-Za-z]:)(?![/\\\\])(?!.*(?:^|[/\\\\])\\.\\.(?:[/\\\\]|$))[^\\x00]+$"
+                          },
+                          "sha256": {
+                            "type": "string",
+                            "pattern": "^[A-Fa-f0-9]{64}$"
+                          }
+                        },
+                        "required": [
+                          "relative_path",
+                          "sha256"
+                        ]
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "required": [
+                    "mod_id",
+                    "version_display",
+                    "files"
+                  ]
+                },
+                "minItems": 1
+              },
+              "excluded_mod_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 0
+              }
+            },
+            "required": [
+              "profile_id",
+              "game_version_display",
+              "game_files",
+              "required_mods",
+              "excluded_mod_ids"
+            ]
+          },
+          "minItems": 1
+        },
+        "unknown_version_policy": {
+          "const": "block_install"
+        }
+      },
+      "required": [
+        "profiles",
+        "unknown_version_policy"
+      ]
+    },
+    "detection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "signals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "log",
+                  "stack"
+                ]
+              },
+              "match_all": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1
+              },
+              "confidence": {
+                "type": "string",
+                "enum": [
+                  "high",
+                  "supporting"
+                ]
+              },
+              "meaning": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "source",
+              "match_all",
+              "confidence",
+              "meaning"
+            ]
+          },
+          "minItems": 0
+        },
+        "installed_fingerprints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "mod_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "relative_path": {
+                "type": "string",
+                "pattern": "^(?![A-Za-z]:)(?![/\\\\])(?!.*(?:^|[/\\\\])\\.\\.(?:[/\\\\]|$))[^\\x00]+$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[A-Fa-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "mod_id",
+              "relative_path",
+              "sha256"
+            ]
+          },
+          "minItems": 1
+        },
+        "installation_state_scope": {
+          "const": "file_state_only"
+        }
+      },
+      "required": [
+        "signals",
+        "installed_fingerprints",
+        "installation_state_scope"
+      ]
+    },
+    "changes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "gameplay_impact": {
+          "type": "string",
+          "minLength": 1
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "mod_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "relative_path": {
+                "type": "string",
+                "pattern": "^(?![A-Za-z]:)(?![/\\\\])(?!.*(?:^|[/\\\\])\\.\\.(?:[/\\\\]|$))[^\\x00]+$"
+              },
+              "purpose": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "mod_id",
+              "relative_path",
+              "purpose"
+            ]
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "description",
+        "gameplay_impact",
+        "files"
+      ]
+    },
+    "relationships": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requires_patches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "patch_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$"
+              },
+              "minimum_version": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$"
+              }
+            },
+            "required": [
+              "patch_id",
+              "minimum_version"
+            ]
+          },
+          "minItems": 0
+        },
+        "requires_when_mod_present": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "mod_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "patch_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$"
+              },
+              "minimum_version": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$"
+              }
+            },
+            "required": [
+              "mod_id",
+              "patch_id",
+              "minimum_version"
+            ]
+          },
+          "minItems": 0
+        },
+        "conflicts_patch_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$"
+          },
+          "minItems": 0
+        },
+        "supersedes_patch_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "requires_patches",
+        "requires_when_mod_present",
+        "conflicts_patch_ids",
+        "supersedes_patch_ids"
+      ]
+    },
+    "multiplayer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy": {
+          "type": "string",
+          "enum": [
+            "all_players",
+            "host_only",
+            "client_only",
+            "not_required",
+            "unknown"
+          ]
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "restart_required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "policy",
+        "explanation",
+        "restart_required"
+      ]
+    },
+    "saved_runs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "support": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "unsupported",
+            "unknown"
+          ]
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "support",
+        "explanation"
+      ]
+    },
+    "validation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "code_review",
+              "automated",
+              "local_game",
+              "multiplayer"
+            ]
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "partial",
+              "fail",
+              "not_run"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "kind",
+          "result",
+          "summary",
+          "date"
+        ]
+      },
+      "minItems": 1
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supported": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "supported",
+        "description"
+      ]
+    },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "package_url": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^https://[^ ]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "package_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Fa-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recipe_url": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^https://[^ ]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recipe_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Fa-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "package_url",
+        "package_sha256",
+        "recipe_url",
+        "recipe_sha256"
+      ]
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "version",
+          "date",
+          "changes"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "$schema",
+    "schema_version",
+    "id",
+    "version",
+    "publication_status",
+    "review_status",
+    "title",
+    "summary",
+    "issue",
+    "components",
+    "compatibility",
+    "detection",
+    "changes",
+    "relationships",
+    "multiplayer",
+    "saved_runs",
+    "validation",
+    "limitations",
+    "rollback",
+    "distribution",
+    "changelog"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Spire patch notice metadata v1",
+  "description": "Notice metadata only. Installation recipes and trusted catalog publication are separately validated.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "publication_status": {
+            "const": "published"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "review_status": {
+            "const": "approved"
+          },
+          "distribution": {
+            "properties": {
+              "package_url": {
+                "type": "string",
+                "pattern": "^https://[^ ]+$"
+              },
+              "package_sha256": {
+                "type": "string",
+                "pattern": "^[A-Fa-f0-9]{64}$"
+              },
+              "recipe_url": {
+                "type": "string",
+                "pattern": "^https://[^ ]+$"
+              },
+              "recipe_sha256": {
+                "type": "string",
+                "pattern": "^[A-Fa-f0-9]{64}$"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

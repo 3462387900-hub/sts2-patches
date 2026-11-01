@@ -1,0 +1,19 @@
+{
+  "dependencies": [
+    {
+      "id": "BaseLib"
+    },
+    {
+      "id": "CyanrainNymphBeta"
+    }
+  ],
+  "description": "修复印花查询写入与战斗牌堆印花恢复不同步；保留染色玩法。",
+  "author": "Local compatibility fixes",
+  "affects_gameplay": true,
+  "has_pck": false,
+  "id": "NymphStampSyncFix",
+  "version": "1.1.0",
+  "has_dll": true,
+  "name": "妮芙印花同步修复",
+  "min_game_version": "0.111.0"
+}

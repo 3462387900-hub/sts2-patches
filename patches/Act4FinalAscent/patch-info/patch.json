@@ -1,0 +1,217 @@
+{
+  "$schema": "./patch.schema.json",
+  "schema_version": "1.0",
+  "id": "local.act4.ambient-timer-fix",
+  "version": "1.0.0",
+  "publication_status": "draft",
+  "review_status": "pending",
+  "title": "第四幕建筑家 BOSS 入场卡死修复",
+  "summary": "修正建筑家环境特效循环的等待，避免入场时持续创建特效而未响应。",
+  "issue": {
+    "type": "single_mod_bug",
+    "symptoms": [
+      "进入建筑家 BOSS 战后窗口无响应，尚未进入第一个玩家回合。",
+      "卡住期间内存持续增长；普通日志可能没有 ERROR。"
+    ],
+    "trigger_conditions": [
+      "已复现于当前模组组合、双人联机、第四幕 Brutal 的建筑家入场阶段。",
+      "是否在其他难度或单人模式同样触发，尚未验证。"
+    ],
+    "diagnosis": {
+      "confidence": "partial",
+      "conclusion": "两次线程采样定位到建筑家环境特效循环持续创建对象；循环等待在部分游戏状态下可立即返回。具体是哪项状态触发跳过等待，尚未直接读取确认。",
+      "evidence": [
+        "两次未响应线程采样均包含 Act4ArchitectBoss.RunAmbientVfxLoopAsync，并处于特效实例化路径。",
+        "同次进程工作集由约 7.8 GB 增至 15.4 GB。",
+        "反编译核对了循环调用 Cmd.Wait 的行为及其跳过等待的条件。"
+      ]
+    }
+  },
+  "components": [
+    {
+      "mod_id": "Act4FinalAscent",
+      "display_name": "第四幕：终焉攀升",
+      "role": "affected",
+      "explanation": "已定位到建筑家自身的环境特效循环。"
+    },
+    {
+      "mod_id": "SpireTogetherFix",
+      "display_name": "联机兼容修复包",
+      "role": "companion",
+      "explanation": "若已安装，它的校验文件需要同步更新；这不是对它造成原始卡死的认定。"
+    }
+  ],
+  "compatibility": {
+    "profiles": [
+      {
+        "profile_id": "known-build-1",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "Act4FinalAscent",
+            "version_display": "0.1.3",
+            "files": [
+              {
+                "relative_path": "Act4FinalAscent.dll",
+                "sha256": "1100CE4C1BDC5140373EFC4AA39C9F61941BC39B0362ED37B0FE3BEA595F96DA"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      },
+      {
+        "profile_id": "known-build-2",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "Act4FinalAscent",
+            "version_display": "0.1.3",
+            "files": [
+              {
+                "relative_path": "Act4FinalAscent.dll",
+                "sha256": "38F2FE4F89009113D7991F1FD47044B7FB2EBBD0F60836A6310C6103BE1D7276"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      }
+    ],
+    "unknown_version_policy": "block_install"
+  },
+  "detection": {
+    "signals": [
+      {
+        "source": "stack",
+        "match_all": [
+          "Act4Placeholder.Act4ArchitectBoss",
+          "RunAmbientVfxLoopAsync"
+        ],
+        "confidence": "supporting",
+        "meaning": "只能说明采样落在该循环；需要重复采样、未响应表现及资源增长才能支持失控判断。"
+      }
+    ],
+    "installed_fingerprints": [
+      {
+        "mod_id": "Act4FinalAscent",
+        "relative_path": "Act4FinalAscent.dll",
+        "sha256": "1100CE4C1BDC5140373EFC4AA39C9F61941BC39B0362ED37B0FE3BEA595F96DA"
+      }
+    ],
+    "installation_state_scope": "file_state_only"
+  },
+  "changes": {
+    "description": [
+      "将特效循环的等待调用换成独立 Godot 定时器。",
+      "保留原有 1.1 / 0.8 / 0.55 秒阶段间隔及循环退出条件。"
+    ],
+    "gameplay_impact": "未修改 BOSS 数值、招式、奖励或存档；保留原有特效。",
+    "files": [
+      {
+        "mod_id": "Act4FinalAscent",
+        "relative_path": "Act4FinalAscent.dll",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      }
+    ]
+  },
+  "relationships": {
+    "requires_patches": [],
+    "requires_when_mod_present": [
+      {
+        "mod_id": "SpireTogetherFix",
+        "patch_id": "local.spiretogetherfix",
+        "minimum_version": "1.0.0"
+      }
+    ],
+    "conflicts_patch_ids": [],
+    "supersedes_patch_ids": []
+  },
+  "multiplayer": {
+    "policy": "all_players",
+    "explanation": "本地特效在各自客户端运行，所有玩家应安装匹配修复；旧联机兼容补丁的校验文件也需同步。",
+    "restart_required": true
+  },
+  "saved_runs": {
+    "support": "unknown",
+    "explanation": "主机继续现有存档后已进入玩家回合，但尚未完成整场双人联机验证，不能据此承诺所有存档均兼容。"
+  },
+  "validation": [
+    {
+      "kind": "code_review",
+      "result": "pass",
+      "summary": "2060 个现有方法体比较，仅环境循环一处调用改变，增加一个定时器辅助方法。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "automated",
+      "result": "pass",
+      "summary": "编译与 JIT 检查、安装/回滚、中文空格路径及错误版本拒绝测试通过。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "local_game",
+      "result": "partial",
+      "summary": "主机修复后的日志确认进入建筑家玩家回合；尚未验证全部阶段。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "multiplayer",
+      "result": "not_run",
+      "summary": "没有完整的双方修复后联机回归记录。",
+      "date": null
+    }
+  ],
+  "limitations": [
+    "本轮仅重新包装和补齐说明，未重跑整场 BOSS 联机。",
+    "只支持已核对的文件构建。",
+    "本条元数据暂为 draft：已随内部包交付，但管理器独立下载安装协议尚未接入。安装使用整合包 Install.cmd。"
+  ],
+  "rollback": {
+    "supported": true,
+    "description": "使用整合包 Rollback.cmd 自选游戏目录，恢复安装前状态并移除新增说明；文件或备份被后续修改时停止。当前不提供单项独立回滚。"
+  },
+  "distribution": {
+    "package_url": null,
+    "package_sha256": null,
+    "recipe_url": null,
+    "recipe_sha256": null
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-02",
+      "changes": [
+        "新增随补丁保存的结构化说明及玩家文档；二进制沿用当前整合包。"
+      ]
+    }
+  ]
+}

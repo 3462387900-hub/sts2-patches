@@ -1,0 +1,16 @@
+{
+  "affects_gameplay": true,
+  "id": "IgnisTurnSyncFix",
+  "dependencies": [
+    {
+      "id": "YuWanCard"
+    }
+  ],
+  "has_dll": true,
+  "name": "焰魔回合同步修复",
+  "version": "1.0.0",
+  "description": "焰魔战斗中等待已开始的选牌动作完成后再结算回合结束。",
+  "author": "Local compatibility fixes",
+  "min_game_version": "0.111.0",
+  "has_pck": false
+}

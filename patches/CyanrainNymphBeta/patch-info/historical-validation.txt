@@ -1,0 +1,1 @@
+PASS: original vs patched comparison: 2528 method bodies; exactly 3 Exhaust call references changed, no other instruction differences.

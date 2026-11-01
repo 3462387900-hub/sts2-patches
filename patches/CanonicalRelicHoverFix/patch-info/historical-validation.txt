@@ -1,0 +1,13 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS: actual combined getter reproduces canonical Owner exception
+PASS: original owned-relic Phrolova tips and other-mod postfix work
+[CanonicalRelicHoverFix] v1.0.0 ready: canonical previews retain base tips; owned relics retain Phrolova tips.
+PASS: canonical preview retains base and unrelated-mod tips without exception
+PASS: owned matching deck retains Phrolova upgrade previews and patch order
+PASS: owned hover result is identical before and after the guard
+PASS: owned deck without matching starter retains original base tips
+PASS: mutable ownerless relic keeps existing null-owner handling
+PASS: idempotent replacement retains original owner for cross-mod ordering
+PASS: unrelated postfix remains installed
+PASS: repeated previews do not mutate relic or deck
+All 10 behavior checks passed with actual Phrolova postfix and ArchaicTooth getter; engine initialization/card-tip data replaced by fixtures.

@@ -1,0 +1,16 @@
+{
+  "min_game_version": "0.111.0",
+  "has_dll": true,
+  "version": "1.0.0",
+  "has_pck": false,
+  "name": "遗物预览兼容修复",
+  "description": "修复 Phrolova 在海克斯组合遗物预览中读取 ArchaicTooth 标准模型 Owner 导致的异常，保留实物遗物提示。",
+  "affects_gameplay": false,
+  "dependencies": [
+    {
+      "id": "Phrolova"
+    }
+  ],
+  "id": "CanonicalRelicHoverFix",
+  "author": "Local compatibility fixes"
+}

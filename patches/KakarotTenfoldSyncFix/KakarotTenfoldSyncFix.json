@@ -1,0 +1,12 @@
+{
+  "id": "KakarotTenfoldSyncFix",
+  "name": "十倍龟派气功联机同步修复",
+  "author": "Local compatibility fixes",
+  "version": "1.0.0",
+  "min_game_version": "0.111.0",
+  "description": "在出牌离开手牌前固定两侧狂野牌条件，避免界面刷新缓存导致主客机追加攻击次数不同。联机所有玩家需安装相同版本。",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [{ "id": "Kakarot", "min_version": "6.1.1" }]
+}

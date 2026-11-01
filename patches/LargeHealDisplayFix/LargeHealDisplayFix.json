@@ -1,0 +1,11 @@
+{
+  "id": "LargeHealDisplayFix",
+  "name": "超大回血数字溢出修复",
+  "author": "Local compatibility fixes",
+  "description": "修复超大治疗量在回血飘字转换为 Int32 时溢出、导致战斗回合卡死的问题。仅修改数字显示，不改变实际回血或战斗规则。",
+  "version": "1.0.0",
+  "min_game_version": "0.111.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": false
+}

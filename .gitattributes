@@ -1,0 +1,7 @@
+*.dll binary
+*.json text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.ps1 -text
+*.cmd -text
+patches/** -text

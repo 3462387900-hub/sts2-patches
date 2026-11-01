@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "entries": [
+    {
+      "id": "local.canonicalrelichoverfix",
+      "component_id": "CanonicalRelicHoverFix",
+      "metadata": "patches/CanonicalRelicHoverFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.doctorpigrewardfix",
+      "component_id": "DoctorPigRewardFix",
+      "metadata": "patches/DoctorPigRewardFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.ignisturnsyncfix",
+      "component_id": "IgnisTurnSyncFix",
+      "metadata": "patches/IgnisTurnSyncFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.kakarottenfoldsyncfix",
+      "component_id": "KakarotTenfoldSyncFix",
+      "metadata": "patches/KakarotTenfoldSyncFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.largehealdisplayfix",
+      "component_id": "LargeHealDisplayFix",
+      "metadata": "patches/LargeHealDisplayFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.nymphstampsyncfix",
+      "component_id": "NymphStampSyncFix",
+      "metadata": "patches/NymphStampSyncFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.phrolovanotesyncfix",
+      "component_id": "PhrolovaNoteSyncFix",
+      "metadata": "patches/PhrolovaNoteSyncFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.spiretogetherfix",
+      "component_id": "SpireTogetherFix",
+      "metadata": "patches/SpireTogetherFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.cyanrainnymphbeta",
+      "component_id": "CyanrainNymphBeta",
+      "metadata": "patches/CyanrainNymphBeta/patch-info/patch.json"
+    },
+    {
+      "id": "local.startingdecktweaks",
+      "component_id": "StartingDeckTweaks",
+      "metadata": "patches/StartingDeckTweaks/patch-info/patch.json"
+    },
+    {
+      "id": "local.act4.ambient-timer-fix",
+      "component_id": "Act4FinalAscent",
+      "metadata": "patches/Act4FinalAscent/patch-info/patch.json"
+    }
+  ]
+}

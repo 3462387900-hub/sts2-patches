@@ -1,0 +1,31 @@
+STS2-AllFixes 20261102.1
+
+本轮实际验证
+PASS: installed local-fix manifests cross-checked against previous delivered packages.
+PASS: 11 components, 26 payload files, 21 exact dependency checks.
+PASS: all preserved runtime-baseline entries resolve to expected actual dependencies, including projected patched Act4 and Nymph DLLs.
+PASS: actual unmodified SpireTogetherFix.ValidateRuntime reproduces the Act4FinalAscent mismatch using the old baseline.
+PASS: the same runtime guard passes all 15 checks with the corrected baseline.
+PASS: only the Act4FinalAscent SHA256 entry changes; no validation code disabled.
+PASS: Windows PowerShell 5.1 Check mode leaves game files unchanged.
+PASS: Chinese/space game paths and renamed mod directories.
+PASS: install missing local fixes and upgrade the existing old Spire baseline/original Act4 DLL.
+PASS: recognize, back up and retire known standalone ChoraleCompatibilityFix.
+PASS: repeated installation is idempotent with no extra backup.
+PASS: byte-exact rollback restores all pre-install files and removes new files; retired legacy fix restored.
+PASS: repeated rollback is idempotent.
+PASS: rollback refuses a subsequent changed/newer DLL before writes.
+PASS: wrong game dependency, unknown original DLL and duplicate mod IDs refused before writes.
+PASS: injected second-file source failure restores all attempted writes in isolated fixture.
+PASS: current live installation read-only preflight passes, planning exactly one file change: SpireTogetherFix/runtime-baseline.json.
+
+第四幕二进制修复已在本会话前段验证
+PASS: 2060 existing method bodies compared; only one ambient-loop wait call changed, one timer helper added.
+PASS: assembly dependencies and resources unchanged.
+PASS: helper and ambient-loop MoveNext JIT-compile against actual game/Godot assemblies.
+
+边界
+No live game files changed while producing the integrated package.
+No complete live multiplayer regression of the integrated bundle has been performed.
+Folder dialog interaction itself has not been manually exercised; launchers use STA and explicit-path installation/rollback tests passed.
+Previous fixes are preserved binaries; their full gameplay test suites were not rerun in this packaging task.

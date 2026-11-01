@@ -1,0 +1,337 @@
+{
+  "$schema": "./patch.schema.json",
+  "schema_version": "1.0",
+  "id": "local.spiretogetherfix",
+  "version": "1.0.0",
+  "publication_status": "draft",
+  "review_status": "pending",
+  "title": "联机兼容修复包 · 本地修复说明",
+  "summary": "本次仅更新第四幕文件校验值；保留既有帮助药水、事件、终曲合声、秘密节点、换幕和能天使营火修复。既有多个子问题不能概括为同一 MOD 冲突。",
+  "issue": {
+    "type": "patch_compat",
+    "symptoms": [
+      "第四幕修复后主菜单出现版本不符红字，联机兼容修复未加载。"
+    ],
+    "trigger_conditions": [
+      "Act4FinalAscent DLL 已修复，但旧 runtime-baseline 仍记载原哈希。"
+    ],
+    "diagnosis": {
+      "confidence": "partial",
+      "conclusion": "本次仅更新第四幕文件校验值；保留既有帮助药水、事件、终曲合声、秘密节点、换幕和能天使营火修复。既有多个子问题不能概括为同一 MOD 冲突。",
+      "evidence": [
+        "既有补丁清单和整合包说明已核对。"
+      ]
+    }
+  },
+  "components": [
+    {
+      "mod_id": "SpireTogetherFix",
+      "display_name": "联机兼容修复包",
+      "role": "affected",
+      "explanation": "Act4FinalAscent DLL 已修复，但旧 runtime-baseline 仍记载原哈希。"
+    },
+    {
+      "mod_id": "Act4FinalAscent",
+      "display_name": "第四幕：终焉攀升",
+      "role": "companion",
+      "explanation": "需联动核对的组件，不表示导致原始问题。"
+    },
+    {
+      "mod_id": "BaseLib",
+      "display_name": "BaseLib",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    },
+    {
+      "mod_id": "STS2-RitsuLib",
+      "display_name": "RitsuLib",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    },
+    {
+      "mod_id": "IntegratedStrategyEvents",
+      "display_name": "集成战略事件",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    },
+    {
+      "mod_id": "HextechRunes",
+      "display_name": "ARAM: Mayhem / 海克斯大乱斗",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    },
+    {
+      "mod_id": "HextechRunesSponsorPack",
+      "display_name": "海克斯大乱斗：额外拓展包",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    },
+    {
+      "mod_id": "GoldEnchantEvent",
+      "display_name": "GoldEnchantEvent 免费附魔事件",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    },
+    {
+      "mod_id": "EndlessMod",
+      "display_name": "无尽模式",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    },
+    {
+      "mod_id": "Neuvillette",
+      "display_name": "Neuvillette",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    },
+    {
+      "mod_id": "AK_Exusiai",
+      "display_name": "能天使",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    }
+  ],
+  "compatibility": {
+    "profiles": [
+      {
+        "profile_id": "known-build-1",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "AK_Exusiai",
+            "version_display": "1.1.0",
+            "files": [
+              {
+                "relative_path": "AK_Exusiai.dll",
+                "sha256": "AFFEB5A53BBF3E85F3CD6D8804CA644F14F6C431FB761A545D4933F27842F75E"
+              },
+              {
+                "relative_path": "AK_Exusiai.pck",
+                "sha256": "1817D66C9EC3CDDE1F1E949F27AC663B686E37BEA42CA4A704682024C39FE82C"
+              }
+            ]
+          },
+          {
+            "mod_id": "Act4FinalAscent",
+            "version_display": "0.1.3",
+            "files": [
+              {
+                "relative_path": "Act4FinalAscent.dll",
+                "sha256": "1100CE4C1BDC5140373EFC4AA39C9F61941BC39B0362ED37B0FE3BEA595F96DA"
+              }
+            ]
+          },
+          {
+            "mod_id": "BaseLib",
+            "version_display": "v3.4.7",
+            "files": [
+              {
+                "relative_path": "BaseLib.dll",
+                "sha256": "55863CA6ADC30A61A7544874E157A519FFE148CCF2B18025947609C4BFF813CE"
+              }
+            ]
+          },
+          {
+            "mod_id": "EndlessMod",
+            "version_display": "v1.24.1",
+            "files": [
+              {
+                "relative_path": "EndlessMod.dll",
+                "sha256": "6295B258D8E981B73774C7247395ECE525C03AA86E995CF146FE69E35F792F3D"
+              }
+            ]
+          },
+          {
+            "mod_id": "GoldEnchantEvent",
+            "version_display": "v1.5.0",
+            "files": [
+              {
+                "relative_path": "GoldEnchantEvent.dll",
+                "sha256": "D875EC7F99ACD01E39C20B1D4EB2891189D3F3062BF4341BB81AC0DC74FB71F7"
+              }
+            ]
+          },
+          {
+            "mod_id": "HextechRunes",
+            "version_display": "0.9.8",
+            "files": [
+              {
+                "relative_path": "lib/0.111.0/HextechRunes.dll",
+                "sha256": "8C203D53C13A7D9CA89F5B9CA4498039D2CFB152E4685727497351FB60F11A2B"
+              }
+            ]
+          },
+          {
+            "mod_id": "HextechRunesSponsorPack",
+            "version_display": "0.9.2",
+            "files": [
+              {
+                "relative_path": "lib/0.111.0/HextechRunesSponsorPack.dll",
+                "sha256": "68AE906B8B804B17855C3BB1476E115A70C4DAEAFBCF509E45556C9B8905B7A0"
+              }
+            ]
+          },
+          {
+            "mod_id": "IntegratedStrategyEvents",
+            "version_display": "0.5.6",
+            "files": [
+              {
+                "relative_path": "lib/0.111.0/IntegratedStrategyEvents.dll",
+                "sha256": "0CADE386CB595311216DD7D69784B6901EDDF61AF2A127FE34127F49052ACAFF"
+              }
+            ]
+          },
+          {
+            "mod_id": "Neuvillette",
+            "version_display": "0.25.0-beta",
+            "files": [
+              {
+                "relative_path": "Neuvillette.dll",
+                "sha256": "0E0957685AB4035B4A473B4F922EB79C2F98CB8DDC67B7B30C72033657873C02"
+              }
+            ]
+          },
+          {
+            "mod_id": "STS2-RitsuLib",
+            "version_display": "0.6.7",
+            "files": [
+              {
+                "relative_path": "compat/0.111.0/STS2-RitsuLib.Runtime.dll",
+                "sha256": "7A77583AF80792213C8DCD7572040A342E7EA0DBED7BBBC8ED8E20776445DCCF"
+              },
+              {
+                "relative_path": "shared/STS2-RitsuLib.Shared.dll",
+                "sha256": "6FEF35E9BD8F39852CC81E6A800128AF572DF312356B565815910B7A0BEF13D7"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      }
+    ],
+    "unknown_version_policy": "block_install"
+  },
+  "detection": {
+    "signals": [],
+    "installed_fingerprints": [
+      {
+        "mod_id": "SpireTogetherFix",
+        "relative_path": "runtime-baseline.json",
+        "sha256": "4DB2DB714F5ED43C73F2D98DABF0483AAB0CD0461AA03854B5634CC1B2634CA6"
+      },
+      {
+        "mod_id": "SpireTogetherFix",
+        "relative_path": "SpireTogetherFix.dll",
+        "sha256": "27FCB7E8E35A7D86FAEC28280AFBFDFF93F1AA182EE2B760B9CA4D9ED1824698"
+      },
+      {
+        "mod_id": "SpireTogetherFix",
+        "relative_path": "SpireTogetherFix.json",
+        "sha256": "299979951081F08464415753BBA72E8CA1D4C970688F8BC44299025767EC1F3D"
+      }
+    ],
+    "installation_state_scope": "file_state_only"
+  },
+  "changes": {
+    "description": [
+      "本次仅更新第四幕文件校验值；保留既有帮助药水、事件、终曲合声、秘密节点、换幕和能天使营火修复。既有多个子问题不能概括为同一 MOD 冲突。"
+    ],
+    "gameplay_impact": "本次校验值更新不改玩法；既有 DLL 包含事件、血量、奖励、站位和联机逻辑修复。",
+    "files": [
+      {
+        "mod_id": "SpireTogetherFix",
+        "relative_path": "runtime-baseline.json",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      },
+      {
+        "mod_id": "SpireTogetherFix",
+        "relative_path": "SpireTogetherFix.dll",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      },
+      {
+        "mod_id": "SpireTogetherFix",
+        "relative_path": "SpireTogetherFix.json",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      }
+    ]
+  },
+  "relationships": {
+    "requires_patches": [],
+    "requires_when_mod_present": [],
+    "conflicts_patch_ids": [],
+    "supersedes_patch_ids": []
+  },
+  "multiplayer": {
+    "policy": "all_players",
+    "explanation": "内部组合统一使用相同修复文件；这是一致性要求，不等于完整联机回归已通过。",
+    "restart_required": true
+  },
+  "saved_runs": {
+    "support": "unknown",
+    "explanation": "本轮未验证所有已有存档和游戏场景。"
+  },
+  "validation": [
+    {
+      "kind": "code_review",
+      "result": "partial",
+      "summary": "核对现有清单、整合说明及可用的历史证据，未重新审查所有源码。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "automated",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    },
+    {
+      "kind": "local_game",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    },
+    {
+      "kind": "multiplayer",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    }
+  ],
+  "limitations": [
+    "本轮补齐随包信息，未进行完整真人联机回归。",
+    "适用范围按当前已核对构建保守限定，不表示所有前置都是冲突方。",
+    "本条元数据暂为 draft：已随内部包交付，但管理器独立下载安装协议尚未接入。安装使用整合包 Install.cmd。"
+  ],
+  "rollback": {
+    "supported": true,
+    "description": "使用整合包 Rollback.cmd 自选游戏目录，恢复安装前状态并移除新增说明；文件或备份被后续修改时停止。当前不提供单项独立回滚。"
+  },
+  "distribution": {
+    "package_url": null,
+    "package_sha256": null,
+    "recipe_url": null,
+    "recipe_sha256": null
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-02",
+      "changes": [
+        "新增随补丁保存的结构化说明及玩家文档；二进制沿用当前整合包。"
+      ]
+    }
+  ]
+}

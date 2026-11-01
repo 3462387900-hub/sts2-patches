@@ -1,0 +1,170 @@
+{
+  "$schema": "./patch.schema.json",
+  "schema_version": "1.0",
+  "id": "local.kakarottenfoldsyncfix",
+  "version": "1.0.0",
+  "publication_status": "draft",
+  "review_status": "pending",
+  "title": "十倍龟派气功联机同步修复 · 本地修复说明",
+  "summary": "使用出牌前手牌快照计算邻接条件，避免读取不同步的 UI 缓存。",
+  "issue": {
+    "type": "single_mod_bug",
+    "symptoms": [
+      "十倍龟派气功追加攻击次数在主客机间不同。"
+    ],
+    "trigger_conditions": [
+      "出牌时双方 UI 邻接手牌缓存刷新时机不同。"
+    ],
+    "diagnosis": {
+      "confidence": "partial",
+      "conclusion": "使用出牌前手牌快照计算邻接条件，避免读取不同步的 UI 缓存。",
+      "evidence": [
+        "既有补丁清单和整合包说明已核对。",
+        "随补丁保存的 patch-info/historical-validation.txt。"
+      ]
+    }
+  },
+  "components": [
+    {
+      "mod_id": "Kakarot",
+      "display_name": "Kakarot",
+      "role": "affected",
+      "explanation": "出牌时双方 UI 邻接手牌缓存刷新时机不同。"
+    }
+  ],
+  "compatibility": {
+    "profiles": [
+      {
+        "profile_id": "known-build-1",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "Kakarot",
+            "version_display": "6.1.1",
+            "files": [
+              {
+                "relative_path": "Kakarot.dll",
+                "sha256": "839C486E78516A5D5A32995880848778F2CB0935E557CAE0CF3071CAA7DA4E40"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      }
+    ],
+    "unknown_version_policy": "block_install"
+  },
+  "detection": {
+    "signals": [],
+    "installed_fingerprints": [
+      {
+        "mod_id": "KakarotTenfoldSyncFix",
+        "relative_path": "KakarotTenfoldSyncFix.dll",
+        "sha256": "4D276DDF94AAEDA1F9B62FB758A3C42AF863723F3B356CC0C3BCADB354E75DD2"
+      },
+      {
+        "mod_id": "KakarotTenfoldSyncFix",
+        "relative_path": "KakarotTenfoldSyncFix.json",
+        "sha256": "E03D9F1E1D3AAEB7640BBC91B66203EDEE3CFB0B415CBC1E10CA01DF2CCD4404"
+      }
+    ],
+    "installation_state_scope": "file_state_only"
+  },
+  "changes": {
+    "description": [
+      "使用出牌前手牌快照计算邻接条件，避免读取不同步的 UI 缓存。"
+    ],
+    "gameplay_impact": "统一追加攻击次数的计算来源，保留原有邻接规则。",
+    "files": [
+      {
+        "mod_id": "KakarotTenfoldSyncFix",
+        "relative_path": "KakarotTenfoldSyncFix.dll",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      },
+      {
+        "mod_id": "KakarotTenfoldSyncFix",
+        "relative_path": "KakarotTenfoldSyncFix.json",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      }
+    ]
+  },
+  "relationships": {
+    "requires_patches": [],
+    "requires_when_mod_present": [],
+    "conflicts_patch_ids": [],
+    "supersedes_patch_ids": []
+  },
+  "multiplayer": {
+    "policy": "all_players",
+    "explanation": "内部组合统一使用相同修复文件；这是一致性要求，不等于完整联机回归已通过。",
+    "restart_required": true
+  },
+  "saved_runs": {
+    "support": "unknown",
+    "explanation": "本轮未验证所有已有存档和游戏场景。"
+  },
+  "validation": [
+    {
+      "kind": "code_review",
+      "result": "partial",
+      "summary": "核对现有清单、整合说明及可用的历史证据，未重新审查所有源码。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "automated",
+      "result": "pass",
+      "summary": "历史 37 项断言通过，含不同 UI 缓存下主客机差异复现和修复验证。",
+      "date": null
+    },
+    {
+      "kind": "local_game",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    },
+    {
+      "kind": "multiplayer",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    }
+  ],
+  "limitations": [
+    "本轮补齐随包信息，未进行完整真人联机回归。",
+    "适用范围按当前已核对构建保守限定，不表示所有前置都是冲突方。",
+    "本条元数据暂为 draft：已随内部包交付，但管理器独立下载安装协议尚未接入。安装使用整合包 Install.cmd。"
+  ],
+  "rollback": {
+    "supported": true,
+    "description": "使用整合包 Rollback.cmd 自选游戏目录，恢复安装前状态并移除新增说明；文件或备份被后续修改时停止。当前不提供单项独立回滚。"
+  },
+  "distribution": {
+    "package_url": null,
+    "package_sha256": null,
+    "recipe_url": null,
+    "recipe_sha256": null
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-02",
+      "changes": [
+        "新增随补丁保存的结构化说明及玩家文档；二进制沿用当前整合包。"
+      ]
+    }
+  ]
+}

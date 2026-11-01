@@ -1,0 +1,206 @@
+{
+  "$schema": "./patch.schema.json",
+  "schema_version": "1.0",
+  "id": "local.canonicalrelichoverfix",
+  "version": "1.0.0",
+  "publication_status": "draft",
+  "review_status": "pending",
+  "title": "遗物预览兼容修复 · 本地修复说明",
+  "summary": "Phrolova 提示补丁读取无玩家归属的标准模型 Owner；增加标准预览保护，保留实物遗物提示。",
+  "issue": {
+    "type": "mod_conflict",
+    "symptoms": [
+      "海克斯组合遗物预览触发 Owner 异常。"
+    ],
+    "trigger_conditions": [
+      "Phrolova 与海克斯遗物预览共同使用标准 ArchaicTooth 模型。"
+    ],
+    "diagnosis": {
+      "confidence": "partial",
+      "conclusion": "Phrolova 提示补丁读取无玩家归属的标准模型 Owner；增加标准预览保护，保留实物遗物提示。",
+      "evidence": [
+        "既有补丁清单和整合包说明已核对。",
+        "随补丁保存的 patch-info/historical-validation.txt。"
+      ]
+    }
+  },
+  "components": [
+    {
+      "mod_id": "Phrolova",
+      "display_name": "弗洛洛",
+      "role": "affected",
+      "explanation": "Phrolova 与海克斯遗物预览共同使用标准 ArchaicTooth 模型。"
+    },
+    {
+      "mod_id": "HextechRunes",
+      "display_name": "ARAM: Mayhem / 海克斯大乱斗",
+      "role": "trigger",
+      "explanation": "Phrolova 与海克斯遗物预览共同使用标准 ArchaicTooth 模型。"
+    }
+  ],
+  "compatibility": {
+    "profiles": [
+      {
+        "profile_id": "known-build-1",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "BaseLib",
+            "version_display": "v3.4.7",
+            "files": [
+              {
+                "relative_path": "BaseLib.dll",
+                "sha256": "55863CA6ADC30A61A7544874E157A519FFE148CCF2B18025947609C4BFF813CE"
+              }
+            ]
+          },
+          {
+            "mod_id": "HextechRunes",
+            "version_display": "0.9.8",
+            "files": [
+              {
+                "relative_path": "lib/0.111.0/HextechRunes.dll",
+                "sha256": "8C203D53C13A7D9CA89F5B9CA4498039D2CFB152E4685727497351FB60F11A2B"
+              }
+            ]
+          },
+          {
+            "mod_id": "Phrolova",
+            "version_display": "v1.1.0",
+            "files": [
+              {
+                "relative_path": "Phrolova.dll",
+                "sha256": "E2BABDADB9C424ABF47AAD68E03667FDEDAAF1CD032760337C1808ADB27C3F4D"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      }
+    ],
+    "unknown_version_policy": "block_install"
+  },
+  "detection": {
+    "signals": [],
+    "installed_fingerprints": [
+      {
+        "mod_id": "CanonicalRelicHoverFix",
+        "relative_path": "CanonicalRelicHoverFix.dll",
+        "sha256": "6E8D37F0D93070AEEAEE4684AE3EF6BF2C695F2D3C92CA49EDDF5F6314A7A763"
+      },
+      {
+        "mod_id": "CanonicalRelicHoverFix",
+        "relative_path": "CanonicalRelicHoverFix.json",
+        "sha256": "5462AE9932B5C7620F17EA6CD2EEA5B093E9793122A659B20F72BBD7152AA36A"
+      },
+      {
+        "mod_id": "CanonicalRelicHoverFix",
+        "relative_path": "runtime-baseline.json",
+        "sha256": "44D23CE6337B6DAAF98984BFB679AD9F6B1710B1F481002076C867AFF6987A37"
+      }
+    ],
+    "installation_state_scope": "file_state_only"
+  },
+  "changes": {
+    "description": [
+      "Phrolova 提示补丁读取无玩家归属的标准模型 Owner；增加标准预览保护，保留实物遗物提示。"
+    ],
+    "gameplay_impact": "仅修正提示显示，保留有归属遗物的原有升级提示。",
+    "files": [
+      {
+        "mod_id": "CanonicalRelicHoverFix",
+        "relative_path": "CanonicalRelicHoverFix.dll",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      },
+      {
+        "mod_id": "CanonicalRelicHoverFix",
+        "relative_path": "CanonicalRelicHoverFix.json",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      },
+      {
+        "mod_id": "CanonicalRelicHoverFix",
+        "relative_path": "runtime-baseline.json",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      }
+    ]
+  },
+  "relationships": {
+    "requires_patches": [],
+    "requires_when_mod_present": [],
+    "conflicts_patch_ids": [],
+    "supersedes_patch_ids": []
+  },
+  "multiplayer": {
+    "policy": "not_required",
+    "explanation": "显示层修复无需同步战斗规则；需要修复本地显示问题的玩家各自安装。当前整合包仍建议队友统一版本。",
+    "restart_required": true
+  },
+  "saved_runs": {
+    "support": "unknown",
+    "explanation": "本轮未验证所有已有存档和游戏场景。"
+  },
+  "validation": [
+    {
+      "kind": "code_review",
+      "result": "partial",
+      "summary": "核对现有清单、整合说明及可用的历史证据，未重新审查所有源码。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "automated",
+      "result": "pass",
+      "summary": "历史 10 项行为检查通过，使用真实 Phrolova 补丁与 ArchaicTooth getter，界面和初始化使用测试替身。",
+      "date": null
+    },
+    {
+      "kind": "local_game",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    },
+    {
+      "kind": "multiplayer",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    }
+  ],
+  "limitations": [
+    "本轮补齐随包信息，未进行完整真人联机回归。",
+    "适用范围按当前已核对构建保守限定，不表示所有前置都是冲突方。",
+    "本条元数据暂为 draft：已随内部包交付，但管理器独立下载安装协议尚未接入。安装使用整合包 Install.cmd。"
+  ],
+  "rollback": {
+    "supported": true,
+    "description": "使用整合包 Rollback.cmd 自选游戏目录，恢复安装前状态并移除新增说明；文件或备份被后续修改时停止。当前不提供单项独立回滚。"
+  },
+  "distribution": {
+    "package_url": null,
+    "package_sha256": null,
+    "recipe_url": null,
+    "recipe_sha256": null
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-02",
+      "changes": [
+        "新增随补丁保存的结构化说明及玩家文档；二进制沿用当前整合包。"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+[IgnisTurnSyncFix] v1.0.0 ready: drain started player actions before Ignis end-turn hooks.
+PASS: production wait patch installs on actual game API
+PASS: both peers wait despite different choice-packet arrival times
+PASS: finishing forced-end action cannot overtake pending card choice
+PASS: host continues waiting for its choice completion
+PASS: both peers reach end-turn only after card completion
+PASS: unstarted, finished and canceled actions do not deadlock turn end
+PASS: noncombat and any actions excluded
+PASS: turn hooks are excluded to avoid circular wait
+PASS: combat teardown cancels pending wait
+PASS: canceled action is terminal while combat cancellation still propagates
+PASS: action failure is not hidden
+PASS: empty queue completes synchronously
+All 12 Ignis behavior checks passed. Real game queue/action types, synthetic completions; no live multiplayer run.

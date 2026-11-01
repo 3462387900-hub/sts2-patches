@@ -1,0 +1,43 @@
+{
+  "has_pck": false,
+  "name": "联机兼容修复包",
+  "min_game_version": "0.111.0",
+  "author": "Local compatibility fixes",
+  "affects_gameplay": true,
+  "id": "SpireTogetherFix",
+  "has_dll": true,
+  "version": "1.0.0",
+  "dependencies": [
+    {
+      "id": "BaseLib"
+    },
+    {
+      "id": "STS2-RitsuLib"
+    },
+    {
+      "id": "IntegratedStrategyEvents"
+    },
+    {
+      "id": "HextechRunes"
+    },
+    {
+      "id": "HextechRunesSponsorPack"
+    },
+    {
+      "id": "Act4FinalAscent"
+    },
+    {
+      "id": "GoldEnchantEvent"
+    },
+    {
+      "id": "EndlessMod"
+    },
+    {
+      "id": "Neuvillette"
+    },
+    {
+      "id": "AK_Exusiai"
+    }
+  ],
+  "description": "现有组合专用：帮助药水、事件一致性、终曲合声血量/奖励/站位、秘密节点与换幕保护、能天使营火动画。"
+}

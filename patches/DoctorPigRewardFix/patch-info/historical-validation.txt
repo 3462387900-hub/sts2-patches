@@ -1,0 +1,30 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS: original real event/factory/Tiphera hook reproduces empty-pool failure
+PASS: original real LeiZhuTi OnPlay reproduces the same empty-pool failure
+[DoctorPigRewardFix] v1.1.0 ready: DoctorPig and LeiZhuTi owner pools and scoped Tiphera compatibility.
+PASS: targeted production patch installed
+PASS: patched event offers five cards and awaits selection
+PASS: five distinct intended pig cards
+PASS: Tiphera filter restored while event waits for choice
+PASS: selected card awarded once and original event reaches finish
+PASS: same seed/pool produces identical ordered offers on simulated peers
+PASS: full reward RNG state matches between peers
+PASS: event retains unfiltered original factory selection order
+PASS: owner with fewer unlocks gets only their available choices
+PASS: small owner pool event finishes
+PASS: empty owner pool follows existing no-selection completion branch
+PASS: ordinary reward generation still enforces Tiphera restriction
+PASS: unrelated failure propagates and scoped exception is cleaned up
+PASS: unrelated pig cards remain restricted outside event
+PASS: LeiZhuTi presents three distinct choices
+PASS: ordinary Tiphera restrictions active during combat card selection
+PASS: generated combat card targets the hand pile
+PASS: LeiZhuTi copies selected card, grants free-this-turn, and adds it to hand
+PASS: unupgraded LeiZhuTi does not upgrade rewards
+PASS: LeiZhuTi ordered choices and full RNG state match on simulated peers
+PASS: empty/cancelled selection grants no invented card
+PASS: upgraded LeiZhuTi upgrades all three upgradable offers
+PASS: generated combat card targets the hand pile
+PASS: LeiZhuTi limits choices to the owner's two unlocked cards
+PASS: empty owner pool completes LeiZhuTi without reward generation
+All 27 behavior checks passed. Actual event async body, factory, RNG, and Tiphera filter; engine UI/save/network replaced by fixtures. No live multiplayer test.

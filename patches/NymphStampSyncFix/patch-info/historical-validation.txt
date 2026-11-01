@@ -1,0 +1,44 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS: original query returns saved blue
+PASS: original real query reproduces state writes from a read
+[NymphStampSyncFix] v1.1.0 ready: read-only queries and deterministic combat stamp restoration.
+PASS: production patch mounted on real Nymph method
+PASS: 100 client-only previews preserve both states and color Pink
+PASS: real deterministic draw hook restores Pink on both peers
+PASS: repeated draw sync does not reapply Pink
+PASS: 100 client-only previews preserve both states and color Blue
+PASS: real deterministic draw hook restores Blue on both peers
+PASS: repeated draw sync does not reapply Blue
+PASS: 100 client-only previews preserve both states and color Gold
+PASS: real deterministic draw hook restores Gold on both peers
+PASS: repeated draw sync does not reapply Gold
+PASS: 100 client-only previews preserve both states and color Black
+PASS: real deterministic draw hook restores Black on both peers
+PASS: repeated draw sync does not reapply Black
+PASS: unstamped card remains unstamped
+PASS: saved standalone card read remains nonmutating
+PASS: actual deck stamp takes precedence over saved record without copying
+PASS: actual combat stamp has highest precedence
+PASS: combat saved-record fallback retained
+PASS: reload-style preview only reads persisted color
+PASS: reload-style explicit draw sync still writes
+PASS: explicit reward/gameplay write API remains available
+PASS: undrawn draw-pile Pink restored equally on both peers
+PASS: unstamped draw-pile card is not assigned an invented stamp
+PASS: combat restoration is idempotent
+PASS: new combat copy restored when deck link is assigned
+PASS: undrawn draw-pile Blue restored equally on both peers
+PASS: unstamped draw-pile card is not assigned an invented stamp
+PASS: combat restoration is idempotent
+PASS: new combat copy restored when deck link is assigned
+PASS: undrawn draw-pile Gold restored equally on both peers
+PASS: unstamped draw-pile card is not assigned an invented stamp
+PASS: combat restoration is idempotent
+PASS: new combat copy restored when deck link is assigned
+PASS: undrawn draw-pile Black restored equally on both peers
+PASS: unstamped draw-pile card is not assigned an invented stamp
+PASS: combat restoration is idempotent
+PASS: new combat copy restored when deck link is assigned
+PASS: unrelated affliction preserved
+PASS: real saved lookup handles ownerless card without test storage
+All 41 behavior checks passed using real Nymph/game types. No game launched.

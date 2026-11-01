@@ -1,0 +1,17 @@
+{
+  "id": "CyanrainNymphBeta",
+  "name": "CyanrainNymph Beta",
+  "author": "Author",
+  "description": "Slay the Spire 2 beta branch version of the CyanrainNymph character mod for use with BaseLib",
+  "version": "v0.0.0-beta+exhaustfix.20261029",
+  "min_game_version": "0.109.0",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [
+    {
+      "id": "BaseLib",
+      "min_version": "3.1.5"
+    }
+  ],
+  "affects_gameplay": true
+}

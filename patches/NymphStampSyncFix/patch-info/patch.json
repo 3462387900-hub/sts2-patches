@@ -1,0 +1,201 @@
+{
+  "$schema": "./patch.schema.json",
+  "schema_version": "1.0",
+  "id": "local.nymphstampsyncfix",
+  "version": "1.0.0",
+  "publication_status": "draft",
+  "review_status": "pending",
+  "title": "妮芙印花同步修复 · 本地修复说明",
+  "summary": "查询避免不一致副作用，战斗副本按照关联牌恢复印花，保留正常染色玩法。",
+  "issue": {
+    "type": "single_mod_bug",
+    "symptoms": [
+      "妮芙印花查询、恢复结果在联机双方不一致。"
+    ],
+    "trigger_conditions": [
+      "印花查询产生写入，或战斗牌堆副本恢复印花。"
+    ],
+    "diagnosis": {
+      "confidence": "partial",
+      "conclusion": "查询避免不一致副作用，战斗副本按照关联牌恢复印花，保留正常染色玩法。",
+      "evidence": [
+        "既有补丁清单和整合包说明已核对。",
+        "随补丁保存的 patch-info/historical-validation.txt。"
+      ]
+    }
+  },
+  "components": [
+    {
+      "mod_id": "CyanrainNymphBeta",
+      "display_name": "CyanrainNymph Beta",
+      "role": "affected",
+      "explanation": "印花查询产生写入，或战斗牌堆副本恢复印花。"
+    },
+    {
+      "mod_id": "BaseLib",
+      "display_name": "BaseLib",
+      "role": "dependency",
+      "explanation": "清单声明的运行前置；不据此认定存在冲突。"
+    }
+  ],
+  "compatibility": {
+    "profiles": [
+      {
+        "profile_id": "known-build-1",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "BaseLib",
+            "version_display": "v3.4.7",
+            "files": [
+              {
+                "relative_path": "BaseLib.dll",
+                "sha256": "55863CA6ADC30A61A7544874E157A519FFE148CCF2B18025947609C4BFF813CE"
+              }
+            ]
+          },
+          {
+            "mod_id": "CyanrainNymphBeta",
+            "version_display": "v0.0.0-beta+exhaustfix.20261029",
+            "files": [
+              {
+                "relative_path": "CyanrainNymphBeta.dll",
+                "sha256": "D23EFDD37AAE216CCF9D780EF97D3EAD2CDF8F5A2CF4031E0C6823AE707C5ED5"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      }
+    ],
+    "unknown_version_policy": "block_install"
+  },
+  "detection": {
+    "signals": [],
+    "installed_fingerprints": [
+      {
+        "mod_id": "NymphStampSyncFix",
+        "relative_path": "NymphStampSyncFix.dll",
+        "sha256": "77380AF43B47B533D826DBB4E0843E5FBD4E1E613FCDEEF75C73B65A1A08D62C"
+      },
+      {
+        "mod_id": "NymphStampSyncFix",
+        "relative_path": "NymphStampSyncFix.json",
+        "sha256": "33145C6F265DB1BF43E58A2593413211A9E0EB81D67DF6E576093232F96D075A"
+      },
+      {
+        "mod_id": "NymphStampSyncFix",
+        "relative_path": "runtime-baseline.json",
+        "sha256": "39FA8A5BB23A0E6BD3B2D9BF9ED5DC92C71E53AE3479976072E8C389316A3BBC"
+      }
+    ],
+    "installation_state_scope": "file_state_only"
+  },
+  "changes": {
+    "description": [
+      "查询避免不一致副作用，战斗副本按照关联牌恢复印花，保留正常染色玩法。"
+    ],
+    "gameplay_impact": "调整印花状态同步和恢复行为，保留染色规则。",
+    "files": [
+      {
+        "mod_id": "NymphStampSyncFix",
+        "relative_path": "NymphStampSyncFix.dll",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      },
+      {
+        "mod_id": "NymphStampSyncFix",
+        "relative_path": "NymphStampSyncFix.json",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      },
+      {
+        "mod_id": "NymphStampSyncFix",
+        "relative_path": "runtime-baseline.json",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      }
+    ]
+  },
+  "relationships": {
+    "requires_patches": [
+      {
+        "patch_id": "local.cyanrainnymphbeta",
+        "minimum_version": "1.0.0"
+      }
+    ],
+    "requires_when_mod_present": [],
+    "conflicts_patch_ids": [],
+    "supersedes_patch_ids": []
+  },
+  "multiplayer": {
+    "policy": "all_players",
+    "explanation": "内部组合统一使用相同修复文件；这是一致性要求，不等于完整联机回归已通过。",
+    "restart_required": true
+  },
+  "saved_runs": {
+    "support": "unknown",
+    "explanation": "本轮未验证所有已有存档和游戏场景。"
+  },
+  "validation": [
+    {
+      "kind": "code_review",
+      "result": "partial",
+      "summary": "核对现有清单、整合说明及可用的历史证据，未重新审查所有源码。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "automated",
+      "result": "pass",
+      "summary": "历史 41 项真实游戏/妮芙类型行为检查通过，未启动游戏。",
+      "date": null
+    },
+    {
+      "kind": "local_game",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    },
+    {
+      "kind": "multiplayer",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    }
+  ],
+  "limitations": [
+    "本轮补齐随包信息，未进行完整真人联机回归。",
+    "适用范围按当前已核对构建保守限定，不表示所有前置都是冲突方。",
+    "本条元数据暂为 draft：已随内部包交付，但管理器独立下载安装协议尚未接入。安装使用整合包 Install.cmd。"
+  ],
+  "rollback": {
+    "supported": true,
+    "description": "使用整合包 Rollback.cmd 自选游戏目录，恢复安装前状态并移除新增说明；文件或备份被后续修改时停止。当前不提供单项独立回滚。"
+  },
+  "distribution": {
+    "package_url": null,
+    "package_sha256": null,
+    "recipe_url": null,
+    "recipe_sha256": null
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-02",
+      "changes": [
+        "新增随补丁保存的结构化说明及玩家文档；二进制沿用当前整合包。"
+      ]
+    }
+  ]
+}

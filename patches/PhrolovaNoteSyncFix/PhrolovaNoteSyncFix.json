@@ -1,0 +1,19 @@
+{
+  "dependencies": [
+    {
+      "id": "BaseLib"
+    },
+    {
+      "id": "Phrolova"
+    }
+  ],
+  "has_dll": true,
+  "has_pck": false,
+  "version": "1.0.0",
+  "affects_gameplay": true,
+  "author": "Local compatibility fixes",
+  "min_game_version": "0.111.0",
+  "name": "弗洛洛音符同步修复",
+  "id": "PhrolovaNoteSyncFix",
+  "description": "修复定音顺序表共享、残留及满音符漏扣，保留正常替换顺序和彩乐优先保护。"
+}

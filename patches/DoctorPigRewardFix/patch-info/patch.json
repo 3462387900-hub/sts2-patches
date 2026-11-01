@@ -1,0 +1,196 @@
+{
+  "$schema": "./patch.schema.json",
+  "schema_version": "1.0",
+  "id": "local.doctorpigrewardfix",
+  "version": "1.0.0",
+  "publication_status": "draft",
+  "review_status": "pending",
+  "title": "博士猪猪奖励兼容修复 · 本地修复说明",
+  "summary": "奖励生成需尊重 Tiphera 已解锁牌池；保持随机数推进、升级和取消行为。",
+  "issue": {
+    "type": "mod_conflict",
+    "symptoms": [
+      "博士猪猪事件或类猪体奖励选牌异常。"
+    ],
+    "trigger_conditions": [
+      "YuWanCard 奖励逻辑遇到 Tiphera 受限可用牌池。"
+    ],
+    "diagnosis": {
+      "confidence": "partial",
+      "conclusion": "奖励生成需尊重 Tiphera 已解锁牌池；保持随机数推进、升级和取消行为。",
+      "evidence": [
+        "既有补丁清单和整合包说明已核对。",
+        "随补丁保存的 patch-info/historical-validation.txt。"
+      ]
+    }
+  },
+  "components": [
+    {
+      "mod_id": "YuWanCard",
+      "display_name": "猪猪",
+      "role": "affected",
+      "explanation": "YuWanCard 奖励逻辑遇到 Tiphera 受限可用牌池。"
+    },
+    {
+      "mod_id": "CznTipheraCharacter",
+      "display_name": "CznTipheraCharacter",
+      "role": "trigger",
+      "explanation": "YuWanCard 奖励逻辑遇到 Tiphera 受限可用牌池。"
+    }
+  ],
+  "compatibility": {
+    "profiles": [
+      {
+        "profile_id": "known-build-1",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "CznTipheraCharacter",
+            "version_display": "2.0.1-beta",
+            "files": [
+              {
+                "relative_path": "CznTipheraCharacter.dll",
+                "sha256": "0F072823C66DC790564607A98A2F6C639322F8957E6A8F9F108F743CDC691943"
+              }
+            ]
+          },
+          {
+            "mod_id": "YuWanCard",
+            "version_display": "v0.5.12",
+            "files": [
+              {
+                "relative_path": "lib/0.111.0/YuWanCard.Content.dll",
+                "sha256": "3D03979E0B951E113D50C3E154D220276608B020158E0D60EBB1E55A7491BE2F"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      }
+    ],
+    "unknown_version_policy": "block_install"
+  },
+  "detection": {
+    "signals": [],
+    "installed_fingerprints": [
+      {
+        "mod_id": "DoctorPigRewardFix",
+        "relative_path": "DoctorPigRewardFix.dll",
+        "sha256": "1D429BCD263AB679D4561C0ED84CCD7ACA77CD501E529C27E8AE3172F69F7942"
+      },
+      {
+        "mod_id": "DoctorPigRewardFix",
+        "relative_path": "DoctorPigRewardFix.json",
+        "sha256": "28DF6FF350807EDC2CA1586A77D09B08969B8EE5739844A60757A14DD29A725C"
+      },
+      {
+        "mod_id": "DoctorPigRewardFix",
+        "relative_path": "runtime-baseline.json",
+        "sha256": "B6FCB18337E25F1792DA309635A588E9B88217AD5823EDF9FA8413765282D69D"
+      }
+    ],
+    "installation_state_scope": "file_state_only"
+  },
+  "changes": {
+    "description": [
+      "奖励生成需尊重 Tiphera 已解锁牌池；保持随机数推进、升级和取消行为。"
+    ],
+    "gameplay_impact": "改变异常奖励的生成和过滤，使其符合角色牌池；并非纯显示修复。",
+    "files": [
+      {
+        "mod_id": "DoctorPigRewardFix",
+        "relative_path": "DoctorPigRewardFix.dll",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      },
+      {
+        "mod_id": "DoctorPigRewardFix",
+        "relative_path": "DoctorPigRewardFix.json",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      },
+      {
+        "mod_id": "DoctorPigRewardFix",
+        "relative_path": "runtime-baseline.json",
+        "purpose": "既有已核对修复文件；本次保持字节不变。"
+      }
+    ]
+  },
+  "relationships": {
+    "requires_patches": [],
+    "requires_when_mod_present": [],
+    "conflicts_patch_ids": [],
+    "supersedes_patch_ids": []
+  },
+  "multiplayer": {
+    "policy": "all_players",
+    "explanation": "内部组合统一使用相同修复文件；这是一致性要求，不等于完整联机回归已通过。",
+    "restart_required": true
+  },
+  "saved_runs": {
+    "support": "unknown",
+    "explanation": "本轮未验证所有已有存档和游戏场景。"
+  },
+  "validation": [
+    {
+      "kind": "code_review",
+      "result": "partial",
+      "summary": "核对现有清单、整合说明及可用的历史证据，未重新审查所有源码。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "automated",
+      "result": "pass",
+      "summary": "历史 27 项行为检查通过；真实事件、随机数与牌池过滤，界面/存档/网络使用测试替身。",
+      "date": null
+    },
+    {
+      "kind": "local_game",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    },
+    {
+      "kind": "multiplayer",
+      "result": "not_run",
+      "summary": "本轮未重新执行该类测试。",
+      "date": null
+    }
+  ],
+  "limitations": [
+    "本轮补齐随包信息，未进行完整真人联机回归。",
+    "适用范围按当前已核对构建保守限定，不表示所有前置都是冲突方。",
+    "本条元数据暂为 draft：已随内部包交付，但管理器独立下载安装协议尚未接入。安装使用整合包 Install.cmd。"
+  ],
+  "rollback": {
+    "supported": true,
+    "description": "使用整合包 Rollback.cmd 自选游戏目录，恢复安装前状态并移除新增说明；文件或备份被后续修改时停止。当前不提供单项独立回滚。"
+  },
+  "distribution": {
+    "package_url": null,
+    "package_sha256": null,
+    "recipe_url": null,
+    "recipe_sha256": null
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-02",
+      "changes": [
+        "新增随补丁保存的结构化说明及玩家文档；二进制沿用当前整合包。"
+      ]
+    }
+  ]
+}
