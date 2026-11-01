@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "repository": "3462387900-hub/sts2-patches",
+  "catalog_commit": "0dca6e3dd775fe1e5c37399fa488dd41b98a12c1",
+  "bundle": {
+    "file_name": "STS2-All-Fixes-20261102-v2.zip",
+    "sha256": "E65D96B9EF095F551A0CE9994A9ECABCC0664C210C898A14B9783F9C58FA2A54",
+    "size": 608697,
+    "download_url": "https://github.com/3462387900-hub/sts2-patches/releases/download/v2026.11.02.2/STS2-All-Fixes-20261102-v2.zip",
+    "asset_api_url": "https://api.github.com/repos/3462387900-hub/sts2-patches/releases/assets/699114016",
+    "release_url": "https://github.com/3462387900-hub/sts2-patches/releases/tag/v2026.11.02.2",
+    "install_mode": "manual_bundle"
+  }
+}
