@@ -1,0 +1,19 @@
+PASS preview is read-only and cancellation before apply writes nothing
+PASS six standalone patches install exactly twelve runtime files
+PASS metadata and schema remain in cache, not mod loader folders
+PASS TurnEndOrderFix has independent selection recipe
+PASS VictoryBreedsArroganceSyncFix has independent selection recipe
+PASS KakarotElbowTargetFix has independent selection recipe
+PASS NymphKazdelRewardFix has independent selection recipe
+PASS Act3SnapshotSaveFix has independent selection recipe
+PASS NeowOptionOrderFix has independent selection recipe
+PASS wrong game directory rejected
+PASS unknown game build rejected before writes
+PASS duplicate mod identity rejected
+PASS corrupt cached payload rejected
+PASS selected install writes only twelve new runtime files
+PASS repeated install has no changes
+PASS unknown installed patch rejected
+PASS rollback refuses a later modified file
+PASS rollback restores original file hashes exactly
+PASS 18 recipe/transaction checks; isolated fixture only, not current manager UI integration.

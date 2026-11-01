@@ -1,0 +1,16 @@
+{
+  "id": "TurnEndOrderFix",
+  "name": "回合结束选牌顺序修复",
+  "author": "Local compatibility fixes",
+  "version": "1.0.0",
+  "description": "选牌尚未完整结束时，后续回合钩子提前修改炸弹层数或格挡，联机校验可能不同。 BeforeSideTurnEnd 只等暂停信号便继续枚举后续钩子；现在逐项等待钩子任务及其 GameAction.CompletionTask，再进入下一项，并保留三个原有阶段。",
+  "min_game_version": "0.111.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [
+    {
+      "id": "STS2_WineFox"
+    }
+  ]
+}

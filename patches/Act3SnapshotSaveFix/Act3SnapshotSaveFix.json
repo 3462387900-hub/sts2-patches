@@ -1,0 +1,16 @@
+{
+  "id": "Act3SnapshotSaveFix",
+  "name": "第四幕第三幕快照存取修复",
+  "author": "Local compatibility fixes",
+  "version": "1.0.0",
+  "description": "第三幕历史快照写入或重载时报 JSON 类型元数据缺失。 游戏源生成 resolver 没有 Mod 私有存储类型；仅替换这两处读写调用，在复制的序列化选项中组合反射 fallback，保留原转换器和 RunHistory 元数据。",
+  "min_game_version": "0.111.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [
+    {
+      "id": "Act4FinalAscent"
+    }
+  ]
+}

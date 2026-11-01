@@ -1,0 +1,22 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS Entry rejects unknown dependency hash
+[local.turn-end-order-fix.v1] 1.0.0 initialized; guarded patches active.
+PASS TurnEndOrderFix initializes with actual baselines and is idempotent
+PASS Entry rejects unknown dependency hash
+[local.victory-breeds-arrogance-sync-fix.v1] 1.0.0 initialized; guarded patches active.
+PASS VictoryBreedsArroganceSyncFix initializes with actual baselines and is idempotent
+PASS Entry rejects unknown dependency hash
+[local.kakarot-elbow-target-fix.v1] 1.0.0 initialized; guarded patches active.
+PASS KakarotElbowTargetFix initializes with actual baselines and is idempotent
+PASS Entry rejects unknown dependency hash
+[local.nymph-kazdel-reward-fix.v1] 1.0.0 initialized; guarded patches active.
+PASS NymphKazdelRewardFix initializes with actual baselines and is idempotent
+PASS Entry rejects unknown dependency hash
+[local.act3-snapshot-save-fix.v1] 1.0.0 initialized; guarded patches active.
+PASS Act3SnapshotSaveFix initializes with actual baselines and is idempotent
+PASS Entry rejects unknown dependency hash
+[local.neow-option-order-fix.v1] 1.0.0 initialized; guarded patches active.
+PASS NeowOptionOrderFix initializes with actual baselines and is idempotent
+PASS partial installation rolls back all hooks for its owner
+PASS all six production patch owners coexist
+PASS guards: 14 checks. Actual production patch methods; engine/UI/network boundaries isolated. No live multiplayer claim.

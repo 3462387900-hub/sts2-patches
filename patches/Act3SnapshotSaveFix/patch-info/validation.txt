@@ -1,0 +1,10 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS real SaveManager serializer rejects unregistered private snapshot store
+PASS writes original field names and schema
+PASS real nested RunHistory metadata round-trips Unicode and values
+PASS game-wide serializer is unchanged
+PASS corrupt, future schema, or null snapshot is rejected
+PASS corrupt, future schema, or null snapshot is rejected
+PASS corrupt, future schema, or null snapshot is rejected
+PASS both real persistence and reload paths patched
+PASS snapshot: 8 checks. Actual production patch methods; engine/UI/network boundaries isolated. No live multiplayer claim.

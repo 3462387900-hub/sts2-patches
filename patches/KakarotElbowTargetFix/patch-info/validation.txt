@@ -1,0 +1,13 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS original elbow uses null CardPlay.Target after an actual hit
+PASS attack is executed once without rerolling RNG
+PASS empty/random/area targeting applies two effects once per unique receiver
+PASS effects target only actual receivers
+PASS attack is executed once without rerolling RNG
+PASS empty/random/area targeting applies two effects once per unique receiver
+PASS effects target only actual receivers
+PASS attack is executed once without rerolling RNG
+PASS empty/random/area targeting applies two effects once per unique receiver
+PASS effects target only actual receivers
+PASS explicit target retains original card path
+PASS elbow: 11 checks. Actual production patch methods; engine/UI/network boundaries isolated. No live multiplayer claim.

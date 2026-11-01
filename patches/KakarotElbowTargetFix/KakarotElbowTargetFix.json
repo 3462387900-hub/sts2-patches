@@ -1,0 +1,19 @@
+{
+  "id": "KakarotElbowTargetFix",
+  "name": "卡卡罗特肘击目标修复",
+  "author": "Local compatibility fixes",
+  "version": "1.0.0",
+  "description": "肘击伤害完成后施加易伤/虚弱时空引用。 原卡把空 CardPlay.Target 交给 PowerCmd.Apply；空显式目标时执行原攻击一次，从实际 DamageResult.Receiver 去重取得目标，不重新抽取 RNG。",
+  "min_game_version": "0.111.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [
+    {
+      "id": "BaseLib"
+    },
+    {
+      "id": "Kakarot"
+    }
+  ]
+}

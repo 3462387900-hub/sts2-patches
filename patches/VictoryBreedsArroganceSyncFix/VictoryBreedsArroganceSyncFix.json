@@ -1,0 +1,16 @@
+{
+  "id": "VictoryBreedsArroganceSyncFix",
+  "name": "猪猪胜兵必骄联机判定修复",
+  "author": "Local compatibility fixes",
+  "version": "1.0.0",
+  "description": "同次出牌在不同客户端判断是否获得力量的结果不同。 该卡调用的意图工具最终读取 LocalContext.GetMe；只在该卡同步计算范围内显式使用出牌者作为受伤方，保留多段意图和原阈值判断。",
+  "min_game_version": "0.111.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [
+    {
+      "id": "YuWanCard"
+    }
+  ]
+}

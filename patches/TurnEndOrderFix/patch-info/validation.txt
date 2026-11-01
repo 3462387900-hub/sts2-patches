@@ -1,0 +1,18 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS expected pre-choice bomb count
+PASS bomb decremented exactly once
+PASS expected pre-choice bomb count
+PASS bomb decremented exactly once
+PASS unpatched real dispatcher reproduces bomb 2/3 at identical choice checkpoint
+PASS expected pre-choice bomb count
+PASS bomb decremented exactly once
+PASS expected pre-choice bomb count
+PASS bomb decremented exactly once
+PASS patched real dispatcher produces matching bomb checkpoint
+PASS same-stage block does not run before choice checkpoint
+PASS wait includes game-action completion after hook task
+PASS same-stage block runs once after complete action
+PASS fault stops later listeners without hanging
+PASS cancellation stops later listeners without hanging
+PASS absent local context preserves original no-op
+PASS turn: 16 checks. Actual production patch methods; engine/UI/network boundaries isolated. No live multiplayer claim.

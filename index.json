@@ -55,6 +55,36 @@
       "id": "local.act4.ambient-timer-fix",
       "component_id": "Act4FinalAscent",
       "metadata": "patches/Act4FinalAscent/patch-info/patch.json"
+    },
+    {
+      "id": "local.turnendorderfix",
+      "component_id": "TurnEndOrderFix",
+      "metadata": "patches/TurnEndOrderFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.victorybreedsarrogancesyncfix",
+      "component_id": "VictoryBreedsArroganceSyncFix",
+      "metadata": "patches/VictoryBreedsArroganceSyncFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.kakarotelbowtargetfix",
+      "component_id": "KakarotElbowTargetFix",
+      "metadata": "patches/KakarotElbowTargetFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.nymphkazdelrewardfix",
+      "component_id": "NymphKazdelRewardFix",
+      "metadata": "patches/NymphKazdelRewardFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.act3snapshotsavefix",
+      "component_id": "Act3SnapshotSaveFix",
+      "metadata": "patches/Act3SnapshotSaveFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.neowoptionorderfix",
+      "component_id": "NeowOptionOrderFix",
+      "metadata": "patches/NeowOptionOrderFix/patch-info/patch.json"
     }
   ]
 }

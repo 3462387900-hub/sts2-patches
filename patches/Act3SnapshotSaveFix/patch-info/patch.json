@@ -1,0 +1,177 @@
+{
+  "$schema": "./patch.schema.json",
+  "schema_version": "1.0",
+  "id": "local.act3snapshotsavefix",
+  "version": "1.0.0",
+  "publication_status": "published",
+  "review_status": "approved",
+  "title": "第四幕第三幕快照存取修复",
+  "summary": "第三幕历史快照写入或重载时报 JSON 类型元数据缺失。",
+  "issue": {
+    "type": "game_api_compat",
+    "symptoms": [
+      "第三幕历史快照写入或重载时报 JSON 类型元数据缺失。"
+    ],
+    "trigger_conditions": [
+      "第四幕调用 SaveManager 序列化私有 Act3SnapshotStore。"
+    ],
+    "diagnosis": {
+      "confidence": "confirmed",
+      "conclusion": "游戏源生成 resolver 没有 Mod 私有存储类型；仅替换这两处读写调用，在复制的序列化选项中组合反射 fallback，保留原转换器和 RunHistory 元数据。",
+      "evidence": [
+        "实际私有存储类型通过原 SaveManager 时重现 NotSupportedException。",
+        "私有类型和嵌套 RunHistory 中文数据往返、坏 JSON/schema/null 拒绝、全局 resolver 不变通过。"
+      ]
+    }
+  },
+  "components": [
+    {
+      "mod_id": "Act4FinalAscent",
+      "display_name": "Act4FinalAscent",
+      "role": "affected",
+      "explanation": "第四幕调用 SaveManager 序列化私有 Act3SnapshotStore。"
+    }
+  ],
+  "compatibility": {
+    "profiles": [
+      {
+        "profile_id": "known-0.111.0-build",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "Act4FinalAscent",
+            "version_display": "0.1.3",
+            "files": [
+              {
+                "relative_path": "Act4FinalAscent.dll",
+                "sha256": "1100CE4C1BDC5140373EFC4AA39C9F61941BC39B0362ED37B0FE3BEA595F96DA"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      }
+    ],
+    "unknown_version_policy": "block_install"
+  },
+  "detection": {
+    "signals": [],
+    "installed_fingerprints": [
+      {
+        "mod_id": "Act3SnapshotSaveFix",
+        "relative_path": "Act3SnapshotSaveFix.dll",
+        "sha256": "15CCBC5400C799E106448486B6C0151FF578737252EC6486943BC9222C839F65"
+      },
+      {
+        "mod_id": "Act3SnapshotSaveFix",
+        "relative_path": "Act3SnapshotSaveFix.json",
+        "sha256": "D794C3F149AD8153EC8E958AED3CB2CB57E7F3518C022C0ED004AB5143130227"
+      }
+    ],
+    "installation_state_scope": "file_state_only"
+  },
+  "changes": {
+    "description": [
+      "游戏源生成 resolver 没有 Mod 私有存储类型；仅替换这两处读写调用，在复制的序列化选项中组合反射 fallback，保留原转换器和 RunHistory 元数据。",
+      "运行时按内嵌基线校验依赖；应用失败撤销本补丁已注册的 hooks。"
+    ],
+    "gameplay_impact": "只改变第四幕私有快照 JSON 编解码；原文件路径和读写流程保持，拒绝损坏数据及未知 schema。",
+    "files": [
+      {
+        "mod_id": "Act3SnapshotSaveFix",
+        "relative_path": "Act3SnapshotSaveFix.dll",
+        "purpose": "独立修复程序集，含兼容基线。"
+      },
+      {
+        "mod_id": "Act3SnapshotSaveFix",
+        "relative_path": "Act3SnapshotSaveFix.json",
+        "purpose": "游戏 MOD 加载清单。"
+      }
+    ]
+  },
+  "relationships": {
+    "requires_patches": [
+      {
+        "patch_id": "local.act4.ambient-timer-fix",
+        "minimum_version": "1.0.0"
+      }
+    ],
+    "requires_when_mod_present": [],
+    "conflicts_patch_ids": [],
+    "supersedes_patch_ids": []
+  },
+  "multiplayer": {
+    "policy": "all_players",
+    "explanation": "内部组合统一使用相同修复文件；这是一致性要求，不等于完整联机回归已通过。",
+    "restart_required": true
+  },
+  "saved_runs": {
+    "support": "unknown",
+    "explanation": "本轮未验证所有已有存档和游戏场景。"
+  },
+  "validation": [
+    {
+      "kind": "code_review",
+      "result": "pass",
+      "summary": "对照实际 DLL、日志及调用链；现场复现边界见限制。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "automated",
+      "result": "pass",
+      "summary": "本轮 8 项隔离行为检查通过，另有 14 项运行时守卫及六项共同初始化检查。引擎/UI/网络边界使用夹具。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "local_game",
+      "result": "not_run",
+      "summary": "未启动真实游戏，未执行真人联机。",
+      "date": null
+    },
+    {
+      "kind": "multiplayer",
+      "result": "not_run",
+      "summary": "未启动真实游戏，未执行真人联机。",
+      "date": null
+    }
+  ],
+  "limitations": [
+    "仅适配列明的 0.111.0 文件构建；未知版本阻止安装。",
+    "未进行真人联机/完整对局回归；文件安装成功不代表原现场已解决。",
+    "不自动重建此前写入失败而缺失的快照；针对已有建筑家修复的第四幕 DLL。"
+  ],
+  "rollback": {
+    "supported": true,
+    "description": "在支持本批补丁的管理器中检查最近一次回滚，再确认撤销该安装批次；未知后续文件或损坏备份会停止回滚。不更改存档。"
+  },
+  "distribution": {
+    "package_url": "https://github.com/3462387900-hub/sts2-patches/releases/download/v2026.11.02.3/Act3SnapshotSaveFix-1.0.0.zip",
+    "package_sha256": "99D76D1BDBD4C2A47772F2EF00549A31F138E23D862B26568438626DF8030B4F",
+    "recipe_url": "https://github.com/3462387900-hub/sts2-patches/releases/download/v2026.11.02.3/Act3SnapshotSaveFix-1.0.0.recipe.json",
+    "recipe_sha256": "BEA07CBDDC3204DBF102FC6CEF44F3A26C1933099C0EADF6B92FC2745A029A14"
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-02",
+      "changes": [
+        "游戏源生成 resolver 没有 Mod 私有存储类型；仅替换这两处读写调用，在复制的序列化选项中组合反射 fallback，保留原转换器和 RunHistory 元数据。",
+        "使用管理器选择安装，不提供独立 CMD 修复包。"
+      ]
+    }
+  ]
+}

@@ -1,38 +1,36 @@
 # 杀戮尖塔 2 补丁库
 
-11 项当前本地修复，每项自身携带用途、涉及 MOD、适用文件、安装状态特征、联机要求、测试边界和回滚说明。
+当前目录共 17 项修复。每项按 `patches/<组件>/patch-info/patch.json` 记录问题、适配文件哈希、联机要求、验证边界及回滚说明；同目录提供中文说明和 schema。
 
-- `patches/<组件>/`：原有修复文件，字节与已交付整合包一致。
-- `patches/<组件>/patch-info/patch.json`：随补丁保存的结构化信息。
-- 同目录 `README.zh-CN.md`：玩家说明，来自同一份数据。
-- `index.json`：仅索引条目位置，不另维护一套用途说明。
-- `installer/`：自选游戏目录的安装、检查与受保护回滚脚本。
-- `tools/`：格式校验及打包工具。
+## 2026-11-02 新增六项
 
-修复的游戏逻辑未在本轮修改。补丁版本字段记录元数据版本，原 MOD/DLL 版本保留在原清单中。修复后的完整文件指纹用于判断文件状态，不证明运行中成功加载。
+| 组件 | 修复范围 |
+| --- | --- |
+| [TurnEndOrderFix](patches/TurnEndOrderFix/patch-info/README.zh-CN.md) | 回合结束选牌与后续钩子的执行顺序 |
+| [VictoryBreedsArroganceSyncFix](patches/VictoryBreedsArroganceSyncFix/patch-info/README.zh-CN.md) | 胜兵必骄使用本地意图预览造成的联机分支差异 |
+| [KakarotElbowTargetFix](patches/KakarotElbowTargetFix/patch-info/README.zh-CN.md) | 肘击随机/群体目标后的空引用 |
+| [NymphKazdelRewardFix](patches/NymphKazdelRewardFix/patch-info/README.zh-CN.md) | 卡兹戴尔奖励模板重复 ToMutable |
+| [Act3SnapshotSaveFix](patches/Act3SnapshotSaveFix/patch-info/README.zh-CN.md) | 第四幕私有第三幕快照缺少 JSON 元数据 |
+| [NeowOptionOrderFix](patches/NeowOptionOrderFix/patch-info/README.zh-CN.md) | 涅奥模组候选追加顺序导致同索引不同选项 |
 
-## 给玩家
+本批仅交付独立补丁数据及管理器安装配方，不制作 Install.cmd / Rollback.cmd 修复包。获取 [Release v2026.11.02.3](https://github.com/3462387900-hub/sts2-patches/releases/tag/v2026.11.02.3)。每项 ZIP 只有本组件 DLL 和 MOD 清单；SHA256 在各自 patch.json 与发布附件中。
 
-所有人均可从 [Releases](https://github.com/3462387900-hub/sts2-patches/releases) 免费下载完整 ZIP，无需 GitHub 登录。解压后运行 Install.cmd。不要把整个仓库复制进 mods。每位玩家选择自己的目录。安装与回滚会一并处理 patch-info 说明文件。
+**管理器接入由维护者后续处理。** 目前旧版管理器固定到旧目录和旧载荷，上传这些文件不等于旧版立即可安装；本次不修改管理器仓库，也不切换旧 manager-feed.json。接入数据和步骤见 [MANAGER-INTEGRATION.md](MANAGER-INTEGRATION.md)。不要将整个仓库或 patch-info JSON 复制进游戏 mods。
 
-目前按已核对的完整模组组合安装，不适合任意模组搭配。管理器 0.2 可读取本仓库、查看各项补丁说明并下载校验整合包；安装仍需手动运行包内 Install.cmd。还没有逐个补丁的独立安装器。元数据保留 draft，表示尚未开放单项自动安装。
+## 验证与适用范围
 
-## 管理器连接
+六项核心行为测试 59 项，守卫/共同初始化测试 14 项，安装配方与事务检查 18 项通过。使用当前 0.111.0 游戏及具体模组 DLL 构建；未知哈希拒绝安装或初始化。完整记录见 [SIX-FIXES-VALIDATION.md](SIX-FIXES-VALIDATION.md)。
 
-公开入口为 `manager-feed.json`：固定本次补丁目录的提交版本，并提供 Releases 附件地址、大小和 SHA256。管理器随后读取该提交的 `index.json` 及每项补丁自身的 `patch-info/patch.json`。入口不重复维护补丁用途说明，不需要访问令牌。
+测试在隔离环境完成，未修改真实游戏和存档，未进行真人联机或完整对局。涅奥追加顺序是有代码与日志支持的机制，尚不能断言是原局唯一原因。所有参与联机的玩家须使用一致补丁及适用模组配置。
 
-修改或新增补丁后，要在验证新包并上传 Releases 后更新入口。不要仅修改下载地址而保留旧哈希。公开下载不代表所有场景都经过实机验证。
+## 维护
 
-## 给维护者
+- src/、tests/：本批源码、内嵌兼容基线和隔离测试。构建方法见 [src/README.md](src/README.md)。
+- index.json：17 项说明的路径索引。
+- manager-plan.json：管理器数据载荷的文件配方；所有写入按哈希白名单执行。
+- tools/build_manager_payload.py：校验元数据、关联、文件哈希并构建管理器缓存载荷，无 CMD 启动器。
+- installer/、tools/build_bundle.py：历史 11 项整合包材料，保留供历史追溯；不用于本批新补丁交付。
 
-安装 Python 与 tools/requirements.txt 的依赖，运行 `python tools/build_bundle.py`，会验证 11 项元数据、校验全部原始载荷和说明文件，生成 dist 下的 ZIP。
+旧 11 项补丁二进制与说明保持原样，未把历史测试冒充本轮回归。SpireTogetherFix 不属于本批修复或自动补装范围。
 
-修改某个 patch.json 后，运行 `python tools/build_bundle.py --refresh-notices`，自动生成玩家说明并更新说明文件哈希，保留旧哈希以支持升级。此命令不会放宽 DLL 等修复文件的校验；修改修复逻辑仍须单独审核、更新版本和载荷清单。
-
-## 验证范围
-
-历史验证报告随对应补丁保留，历史通过不代表本轮重新执行。新包仅增加说明并使安装器支持首次写入说明文件，安装/回滚回归另见 VALIDATION.md。完整真人联机未在本轮验证。
-
-## 分发范围
-
-本仓库开放下载。第三方模组及其修改后二进制的权利归原作者；此仓库不授予第三方资源再分发许可。未附带游戏本体、存档、账号配置或个人日志。
+第三方游戏和模组的权利归原作者。新增源码和补丁不包含游戏本体、第三方引用库、存档、个人日志或账号信息。

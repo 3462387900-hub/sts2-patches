@@ -1,0 +1,19 @@
+{
+  "id": "NeowOptionOrderFix",
+  "name": "涅奥模组选项顺序同步修复",
+  "author": "Local compatibility fixes",
+  "version": "1.0.0",
+  "description": "双方同一玩家同一选择索引，对应橡皮泥和雨暗等不同选项。 主客日志同一选择索引分别记录 YUIEXTRA-PLASTICINE 与 YUWANCARD-RAIN_DARK。两个默认优先级 Postfix 无互相顺序声明；抽选前将原候选按 TextKey/Relic ID 作 Ordinal 排序。",
+  "min_game_version": "0.111.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [
+    {
+      "id": "YUIExtra"
+    },
+    {
+      "id": "YuWanCard"
+    }
+  ]
+}

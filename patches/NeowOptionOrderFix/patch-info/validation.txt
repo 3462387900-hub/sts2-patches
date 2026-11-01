@@ -1,0 +1,9 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS same RNG index maps to Plasticine/RainDark when append order differs
+PASS real patched candidate getter has equal order before RNG
+PASS keeps every original option instance and callback
+PASS sort runs at final postfix priority
+PASS ordinal candidate order independent of zh-CN
+PASS ordinal candidate order independent of en-US
+PASS ordinal candidate order independent of tr-TR
+PASS neow: 7 checks. Actual production patch methods; engine/UI/network boundaries isolated. No live multiplayer claim.

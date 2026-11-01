@@ -1,0 +1,22 @@
+{
+  "id": "NymphKazdelRewardFix",
+  "name": "妮芙卡兹戴尔奖励克隆修复",
+  "author": "Local compatibility fixes",
+  "version": "1.0.0",
+  "description": "皇家争执等奖励抽到 GougeMemory 时触发 AssertCanonical。 卡池返回已可变的 Kazdel 模板，而奖励工厂继续调用 ToMutable；仅登记该池生成的确切实例，并用 MutableClone 产生独立副本，保留变体字段。",
+  "min_game_version": "0.111.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [
+    {
+      "id": "BaseLib"
+    },
+    {
+      "id": "CyanrainNymphBeta"
+    },
+    {
+      "id": "STS2-RitsuLib"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "$schema": "./patch.schema.json",
+  "schema_version": "1.0",
+  "id": "local.nymphkazdelrewardfix",
+  "version": "1.0.0",
+  "publication_status": "published",
+  "review_status": "approved",
+  "title": "妮芙卡兹戴尔奖励克隆修复",
+  "summary": "皇家争执等奖励抽到 GougeMemory 时触发 AssertCanonical。",
+  "issue": {
+    "type": "game_api_compat",
+    "symptoms": [
+      "皇家争执等奖励抽到 GougeMemory 时触发 AssertCanonical。"
+    ],
+    "trigger_conditions": [
+      "奖励池使用妮芙卡兹戴尔池生成的变体模板。"
+    ],
+    "diagnosis": {
+      "confidence": "confirmed",
+      "conclusion": "卡池返回已可变的 Kazdel 模板，而奖励工厂继续调用 ToMutable；仅登记该池生成的确切实例，并用 MutableClone 产生独立副本，保留变体字段。",
+      "evidence": [
+        "真实 Kazdel pool 和 GougeMemory 类型重现双重 ToMutable 失败。",
+        "两份奖励的变体、独立性、模板不变及其他可变卡仍被拒绝均已验证。"
+      ]
+    }
+  },
+  "components": [
+    {
+      "mod_id": "BaseLib",
+      "display_name": "BaseLib",
+      "role": "dependency",
+      "explanation": "本构建运行前置，按文件哈希匹配。"
+    },
+    {
+      "mod_id": "CyanrainNymphBeta",
+      "display_name": "CyanrainNymphBeta",
+      "role": "affected",
+      "explanation": "奖励池使用妮芙卡兹戴尔池生成的变体模板。"
+    },
+    {
+      "mod_id": "STS2-RitsuLib",
+      "display_name": "STS2-RitsuLib",
+      "role": "dependency",
+      "explanation": "本构建运行前置，按文件哈希匹配。"
+    }
+  ],
+  "compatibility": {
+    "profiles": [
+      {
+        "profile_id": "known-0.111.0-build",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "BaseLib",
+            "version_display": "v3.4.7",
+            "files": [
+              {
+                "relative_path": "BaseLib.dll",
+                "sha256": "55863CA6ADC30A61A7544874E157A519FFE148CCF2B18025947609C4BFF813CE"
+              }
+            ]
+          },
+          {
+            "mod_id": "CyanrainNymphBeta",
+            "version_display": "v0.0.0-beta+exhaustfix.20261029",
+            "files": [
+              {
+                "relative_path": "CyanrainNymphBeta.dll",
+                "sha256": "D23EFDD37AAE216CCF9D780EF97D3EAD2CDF8F5A2CF4031E0C6823AE707C5ED5"
+              }
+            ]
+          },
+          {
+            "mod_id": "STS2-RitsuLib",
+            "version_display": "0.6.7",
+            "files": [
+              {
+                "relative_path": "compat/0.111.0/STS2-RitsuLib.Runtime.dll",
+                "sha256": "7A77583AF80792213C8DCD7572040A342E7EA0DBED7BBBC8ED8E20776445DCCF"
+              },
+              {
+                "relative_path": "shared/STS2-RitsuLib.Shared.dll",
+                "sha256": "6FEF35E9BD8F39852CC81E6A800128AF572DF312356B565815910B7A0BEF13D7"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      }
+    ],
+    "unknown_version_policy": "block_install"
+  },
+  "detection": {
+    "signals": [],
+    "installed_fingerprints": [
+      {
+        "mod_id": "NymphKazdelRewardFix",
+        "relative_path": "NymphKazdelRewardFix.dll",
+        "sha256": "E4F5B75B270A976488FE78EEDB82BD10D0DBD9759762965E2D9F88040A03D830"
+      },
+      {
+        "mod_id": "NymphKazdelRewardFix",
+        "relative_path": "NymphKazdelRewardFix.json",
+        "sha256": "A843B5FF9489E7BAF8984D614982B6CF5C780EC86BEB07D8392742211862AF5A"
+      }
+    ],
+    "installation_state_scope": "file_state_only"
+  },
+  "changes": {
+    "description": [
+      "卡池返回已可变的 Kazdel 模板，而奖励工厂继续调用 ToMutable；仅登记该池生成的确切实例，并用 MutableClone 产生独立副本，保留变体字段。",
+      "运行时按内嵌基线校验依赖；应用失败撤销本补丁已注册的 hooks。"
+    ],
+    "gameplay_impact": "保留卡兹戴尔变体及深复制数据，不把奖励替换为普通卡，也不放宽其他可变卡的断言。",
+    "files": [
+      {
+        "mod_id": "NymphKazdelRewardFix",
+        "relative_path": "NymphKazdelRewardFix.dll",
+        "purpose": "独立修复程序集，含兼容基线。"
+      },
+      {
+        "mod_id": "NymphKazdelRewardFix",
+        "relative_path": "NymphKazdelRewardFix.json",
+        "purpose": "游戏 MOD 加载清单。"
+      }
+    ]
+  },
+  "relationships": {
+    "requires_patches": [
+      {
+        "patch_id": "local.cyanrainnymphbeta",
+        "minimum_version": "1.0.0"
+      }
+    ],
+    "requires_when_mod_present": [],
+    "conflicts_patch_ids": [],
+    "supersedes_patch_ids": []
+  },
+  "multiplayer": {
+    "policy": "all_players",
+    "explanation": "内部组合统一使用相同修复文件；这是一致性要求，不等于完整联机回归已通过。",
+    "restart_required": true
+  },
+  "saved_runs": {
+    "support": "unknown",
+    "explanation": "本轮未验证所有已有存档和游戏场景。"
+  },
+  "validation": [
+    {
+      "kind": "code_review",
+      "result": "pass",
+      "summary": "对照实际 DLL、日志及调用链；现场复现边界见限制。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "automated",
+      "result": "pass",
+      "summary": "本轮 7 项隔离行为检查通过，另有 14 项运行时守卫及六项共同初始化检查。引擎/UI/网络边界使用夹具。",
+      "date": "2026-11-02"
+    },
+    {
+      "kind": "local_game",
+      "result": "not_run",
+      "summary": "未启动真实游戏，未执行真人联机。",
+      "date": null
+    },
+    {
+      "kind": "multiplayer",
+      "result": "not_run",
+      "summary": "未启动真实游戏，未执行真人联机。",
+      "date": null
+    }
+  ],
+  "limitations": [
+    "仅适配列明的 0.111.0 文件构建；未知版本阻止安装。",
+    "未进行真人联机/完整对局回归；文件安装成功不代表原现场已解决。",
+    "本版针对已应用消耗接口修复的妮芙 DLL；管理器自动关联该修复。"
+  ],
+  "rollback": {
+    "supported": true,
+    "description": "在支持本批补丁的管理器中检查最近一次回滚，再确认撤销该安装批次；未知后续文件或损坏备份会停止回滚。不更改存档。"
+  },
+  "distribution": {
+    "package_url": "https://github.com/3462387900-hub/sts2-patches/releases/download/v2026.11.02.3/NymphKazdelRewardFix-1.0.0.zip",
+    "package_sha256": "5C1FEC04F8EA295B0546A46F59B2F0F09876640242E42C559BA8E16BCE9E9425",
+    "recipe_url": "https://github.com/3462387900-hub/sts2-patches/releases/download/v2026.11.02.3/NymphKazdelRewardFix-1.0.0.recipe.json",
+    "recipe_sha256": "120867FA58349873D73F3ECFBC580A8EBC2C52B8121128F1032CB8068B99E817"
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-02",
+      "changes": [
+        "卡池返回已可变的 Kazdel 模板，而奖励工厂继续调用 ToMutable；仅登记该池生成的确切实例，并用 MutableClone 产生独立副本，保留变体字段。",
+        "使用管理器选择安装，不提供独立 CMD 修复包。"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+SentryGodotInitializer: Sentry GDExtension not loaded in this process; skipping. If you see this in a running game (not during project export or IDE script analysis), check Godot's log for extension load failures.
+PASS original intent preview depends on local player's defenses
+PASS single/multiple/mixed intents use explicit caster for both peers
+PASS strict HP threshold branch matches
+PASS single/multiple/mixed intents use explicit caster for both peers
+PASS strict HP threshold branch matches
+PASS single/multiple/mixed intents use explicit caster for both peers
+PASS strict HP threshold branch matches
+PASS ordinary UI preview remains local after scoped calculation
+PASS exception restores explicit-player scope
+PASS production patch installed into real card async body
+PASS victory: 10 checks. Actual production patch methods; engine/UI/network boundaries isolated. No live multiplayer claim.
