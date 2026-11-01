@@ -15,7 +15,9 @@
 
 本批仅交付独立补丁数据及管理器安装配方，不制作 Install.cmd / Rollback.cmd 修复包。获取 [Release v2026.11.02.3](https://github.com/3462387900-hub/sts2-patches/releases/tag/v2026.11.02.3)。每项 ZIP 只有本组件 DLL 和 MOD 清单；SHA256 在各自 patch.json 与发布附件中。
 
-**管理器接入由维护者后续处理。** 目前旧版管理器固定到旧目录和旧载荷，上传这些文件不等于旧版立即可安装；本次不修改管理器仓库，也不切换旧 manager-feed.json。接入数据和步骤见 [MANAGER-INTEGRATION.md](MANAGER-INTEGRATION.md)。不要将整个仓库或 patch-info JSON 复制进游戏 mods。
+**管理器 0.10.0 已接入全部 17 项，正式 manager-feed.json 已同步。** 请先在管理器「检查更新」升级，再刷新补丁源并重新扫描。下载 [尖塔修补站 0.10.0](https://github.com/3462387900-hub/sts2-patch-manager/releases/tag/v0.10.0)。新增六项可选择安装、参与联机差异补齐并按批次回滚；已有匹配文件跳过。不要将整个仓库或 patch-info JSON 复制进游戏 mods。
+
+后续上传请遵循 [补丁发布指南](https://github.com/3462387900-hub/sts2-patch-manager/blob/main/补丁发布指南.md)：补丁说明与 index → 发布载荷 → 接入并发布管理器 → 校验并切换 manager-feed。仅上传文件不会自动扩大旧管理器的安装能力。提供 [默认只校验的发布脚本](https://github.com/3462387900-hub/sts2-patch-manager/blob/main/scripts/发布补丁源.ps1)。接入与验证边界见 [MANAGER-INTEGRATION.md](MANAGER-INTEGRATION.md)。
 
 ## 验证与适用范围
 
