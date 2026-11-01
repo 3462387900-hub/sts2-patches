@@ -1,6 +1,8 @@
 # 本批补丁的管理器接入
 
-用户要求先上传补丁仓库，管理器后续自行操作。本次不改管理器源码或现有在线入口，不宣称管理器端到端安装已经通过。
+管理器 [0.10.0](https://github.com/3462387900-hub/sts2-patch-manager/releases/tag/v0.10.0) 已完成接入，正式 `manager-feed.json` 已指向 17 项目录及 v3 载荷。玩家先更新管理器，再刷新补丁源、重新扫描；联机双方重新导出清单。
+
+后续发布见 [补丁发布指南](https://github.com/3462387900-hub/sts2-patch-manager/blob/main/补丁发布指南.md) 和 [发布校验脚本](https://github.com/3462387900-hub/sts2-patch-manager/blob/main/scripts/发布补丁源.ps1)。脚本默认只校验，增加 `-Publish` 才更新正式入口。补丁的预发布标记与历史说明状态保持原样，不把接入测试当成真人联机验证。
 
 ## 可直接复用的数据
 
@@ -10,9 +12,9 @@ Release `v2026.11.02.3` 包含六份 `<组件>-1.0.0.zip`、对应 `.recipe.json
 
 新组件只安装两个文件：同名 DLL 和同名 MOD 清单。运行时基线编译进 DLL；结构化 patch-info 和 schema 只保留在仓库/缓存，避免被游戏递归扫描成 MOD 清单。
 
-## 现有管理器需要接入的地方
+## 本次已完成的管理器接入
 
-核对时管理器 main 为 `c72ccc4d1454c45e17ffa591b7e3f91a57b1cdc3`（0.9.0）。后续操作应重新读取最新版本，勿覆盖其他更新。
+接入前版本为 0.9.0；0.10.0 实现提交为 `5219bb06beb44ec6c69261ba02d43303cb73d576`，目录固定为补丁仓库 `f487b2bfa90fd3741221197b9185b9ba272add16`。以下清单作为后续接入检查表。每次操作前仍应重新读取最新版本。
 
 1. 将 `index.json` 及 17 项完整 metadata 更新为内置目录快照；记录对应补丁仓库 commit。`Catalog.ReviewedBundle` 和 `SelectionPlanner` 不能仅凭在线发布状态跳过既有审核。
 2. 将已下载载荷中的 `plan.json` 更新为 `catalog-plan.json`，保留旧文件白名单与关联条件。不要仅使用旧计划或只追加标题。
@@ -21,8 +23,12 @@ Release `v2026.11.02.3` 包含六份 `<组件>-1.0.0.zip`、对应 `.recipe.json
 5. 新增妮芙奖励修复关联 `local.cyanrainnymphbeta`，快照修复关联 `local.act4.ambient-timer-fix`；保持依赖闭包与预览 token 校验。
 6. 完成真实管理器的目录加载、选择安装、依赖变更拒绝、重复 ID、损坏下载、中文空格路径、取消和最近批次回滚回归后，再发布管理器并切换正式 `manager-feed.json`。
 
-本仓库的 `manager-feed-v3.json` 是接入候选：固定已上传的目录 commit 和附件指纹，install_mode 为 `manager_payload`。旧管理器只接受 `manual_bundle`，不可直接将候选替换为正式入口而不更新客户端。
+本仓库的 `manager-feed-v3.json` 是本次候选记录，已核对并同步到正式 `manager-feed.json`，install_mode 为 `manager_payload`。0.9.0 及更早管理器不支持该协议，请通过独立的「检查更新」入口升级。
 
 ## 已测与未测
 
-已用同源 Common/SelectionBridge 在带标记、零字节游戏 EXE 的隔离目录检查六项独立配方、安装和回滚共 18 项。未执行用户当前管理器 UI 安装，未触碰真实游戏目录，也未发布管理器新版。具体边界见 SIX-FIXES-VALIDATION.md。
+补丁制作阶段的行为与配方验证记录见 [SIX-FIXES-VALIDATION.md](SIX-FIXES-VALIDATION.md)。
+
+管理器接入阶段另完成：新增六项逐项与组合事务 43 项、原有选装回归 20 项、完整安装回归 25 项；WPF 实际按钮检查 17 项可见、必要关联、预览/安装/回滚及仅补说明流程。发布自检涵盖推荐、下载、程序更新、联机规则与目录配方一致性。旧 .1/.2 备份版本兼容以模拟日志验证，不冒充所有历史备份实测。
+
+游戏写入只发生在有标记、零字节游戏 EXE 的隔离目录。真实游戏、MOD 和存档未修改；未新增真人联机或完整对局验证。程序 Release 已发布，匿名更新下载校验通过。
