@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "repository": "3462387900-hub/sts2-patches",
-  "catalog_commit": "0dca6e3dd775fe1e5c37399fa488dd41b98a12c1",
+  "catalog_commit": "f487b2bfa90fd3741221197b9185b9ba272add16",
   "bundle": {
-    "file_name": "STS2-All-Fixes-20261102-v2.zip",
-    "sha256": "E65D96B9EF095F551A0CE9994A9ECABCC0664C210C898A14B9783F9C58FA2A54",
-    "size": 608697,
-    "download_url": "https://github.com/3462387900-hub/sts2-patches/releases/download/v2026.11.02.2/STS2-All-Fixes-20261102-v2.zip",
-    "asset_api_url": "https://api.github.com/repos/3462387900-hub/sts2-patches/releases/assets/699114016",
-    "release_url": "https://github.com/3462387900-hub/sts2-patches/releases/tag/v2026.11.02.2",
-    "install_mode": "manual_bundle"
+    "file_name": "STS2-Manager-Payload-20261102-v3.zip",
+    "sha256": "6AD6F7340F3CDB2FE28042CDB3084737A4F7AA798E125EBFDF23AB2EAE8B30FC",
+    "size": 695637,
+    "download_url": "https://github.com/3462387900-hub/sts2-patches/releases/download/v2026.11.02.3/STS2-Manager-Payload-20261102-v3.zip",
+    "asset_api_url": "https://api.github.com/repos/3462387900-hub/sts2-patches/releases/assets/699687356",
+    "release_url": "https://github.com/3462387900-hub/sts2-patches/releases/tag/v2026.11.02.3",
+    "install_mode": "manager_payload"
   }
 }
