@@ -1,6 +1,10 @@
 # 杀戮尖塔 2 补丁库
 
-当前目录共 17 项修复。每项按 `patches/<组件>/patch-info/patch.json` 记录问题、适配文件哈希、联机要求、验证边界及回滚说明；同目录提供中文说明和 schema。
+当前目录共 18 项修复。每项按 `patches/<组件>/patch-info/patch.json` 记录问题、适配文件哈希、联机要求、验证边界及回滚说明；同目录提供中文说明和 schema。
+
+## 2026-11-05 新增莱伊联机修复
+
+[莱伊联机结算兼容修复](patches/RayCoopCompatibilityFix/patch-info/README.zh-CN.md)提供结束战斗后的延迟抽牌防护，以及白鲸药水下莱伊攻击的同步目标兼容。首次牌堆／升级差异未定位，真人双机实战待复测。管理器 0.12.5 接入本条目，使用审核载荷 v2026.11.05.1；不要把 patch-info 复制进游戏。
 
 ## 2026-11-02 新增六项
 
@@ -28,7 +32,7 @@
 ## 维护
 
 - src/、tests/：本批源码、内嵌兼容基线和隔离测试。构建方法见 [src/README.md](src/README.md)。
-- index.json：17 项说明的路径索引。
+- index.json：18 项说明的路径索引。
 - manager-plan.json：管理器数据载荷的文件配方；所有写入按哈希白名单执行。
 - tools/build_manager_payload.py：校验元数据、关联、文件哈希并构建管理器缓存载荷，无 CMD 启动器。
 - installer/、tools/build_bundle.py：历史 11 项整合包材料，保留供历史追溯；不用于本批新补丁交付。

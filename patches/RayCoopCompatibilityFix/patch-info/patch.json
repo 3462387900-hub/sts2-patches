@@ -1,0 +1,259 @@
+{
+  "$schema": "./patch.schema.json",
+  "schema_version": "1.0",
+  "id": "local.raycoopcompatibilityfix",
+  "version": "1.0.0",
+  "publication_status": "published",
+  "review_status": "approved",
+  "title": "莱伊联机结算兼容修复",
+  "summary": "防止结束战斗后补发延迟抽牌；兼容白鲸药水下莱伊攻击的空目标。",
+  "issue": {
+    "type": "mod_conflict",
+    "symptoms": [
+      "莱伊／空弦联机局中，8 次不同步均为队友端多出 1 层下回合抽牌。",
+      "乌萨斯白鲸生效时 SandView、Entrance 单体攻击报空引用。"
+    ],
+    "trigger_conditions": [
+      "敌方 SpinToWin 将非起手抽牌延迟到下回合，战斗结束边界仍触发转换。",
+      "能天使白鲸药水把单体攻击改为随机攻击，莱伊卡牌仍读取空 CardPlay.Target。"
+    ],
+    "diagnosis": {
+      "confidence": "partial",
+      "conclusion": "白鲸空目标路径已由实际 DLL 与异常堆栈确认；海克斯转换入口缺少 IsOverOrEnding 防护，现补齐结束边界。重复不同步日志符合此风险，但未记录完整异步加状态调用栈，不宣称全部根因已证实。",
+      "evidence": [
+        "9 次独立不同步中 8 次为同一层延迟抽牌差异；后 5 份双方快照已无敌人。",
+        "历史记录第三幕敌方海克斯含 SpinToWin（150）。",
+        "PowerCmd 使用 IsEnding，战斗退出后该值为 false；转换入口新增 IsOverOrEnding。",
+        "SandView、Entrance 的 Targeting(null) 堆栈与 BelugaRandomTargetPatch 对照。"
+      ]
+    }
+  },
+  "components": [
+    {
+      "mod_id": "Ray",
+      "display_name": "莱伊",
+      "role": "affected",
+      "explanation": "白鲸改为随机攻击后仍读取显式目标。"
+    },
+    {
+      "mod_id": "AK_Exusiai",
+      "display_name": "能天使",
+      "role": "trigger",
+      "explanation": "白鲸药水改变单体攻击目标类型。"
+    },
+    {
+      "mod_id": "HextechRunes",
+      "display_name": "海克斯大乱斗",
+      "role": "affected",
+      "explanation": "敌方延迟抽牌转换在结束战斗边界需要保护。"
+    },
+    {
+      "mod_id": "STS2-RitsuLib",
+      "display_name": "RitsuLib",
+      "role": "dependency",
+      "explanation": "出牌钩子入口与次要资源数据。"
+    },
+    {
+      "mod_id": "BaseLib",
+      "display_name": "BaseLib",
+      "role": "dependency",
+      "explanation": "当前组合的运行前置。"
+    }
+  ],
+  "compatibility": {
+    "profiles": [
+      {
+        "profile_id": "ray-0.1.0-game-0.111.0",
+        "game_version_display": "0.111.0",
+        "game_files": [
+          {
+            "relative_path": "data_sts2_windows_x86_64/sts2.dll",
+            "sha256": "0861BFA1DF347538D932F22D580E75420F08082792EB914E53B4882764ACDBE9"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/0Harmony.dll",
+            "sha256": "EF1898322C9F5C86DC1B0758B272A9C440823B4A41CA9A0B82A3AA6B3D206387"
+          },
+          {
+            "relative_path": "data_sts2_windows_x86_64/GodotSharp.dll",
+            "sha256": "0E4897ECDFB31456A97C7D8028DFB8D7DBDC632E2F73FC9B438D7B266A139289"
+          }
+        ],
+        "required_mods": [
+          {
+            "mod_id": "Ray",
+            "version_display": "0.1.0",
+            "files": [
+              {
+                "relative_path": "Ray.dll",
+                "sha256": "D4960AE64B535691861A101DB4E780D6BB92868485BB52692C483146155F92A1"
+              }
+            ]
+          },
+          {
+            "mod_id": "AK_Exusiai",
+            "version_display": "1.1.0",
+            "files": [
+              {
+                "relative_path": "AK_Exusiai.dll",
+                "sha256": "AFFEB5A53BBF3E85F3CD6D8804CA644F14F6C431FB761A545D4933F27842F75E"
+              }
+            ]
+          },
+          {
+            "mod_id": "BaseLib",
+            "version_display": "v3.4.7",
+            "files": [
+              {
+                "relative_path": "BaseLib.dll",
+                "sha256": "55863CA6ADC30A61A7544874E157A519FFE148CCF2B18025947609C4BFF813CE"
+              }
+            ]
+          },
+          {
+            "mod_id": "HextechRunes",
+            "version_display": "0.9.8",
+            "files": [
+              {
+                "relative_path": "lib/0.111.0/HextechRunes.dll",
+                "sha256": "8C203D53C13A7D9CA89F5B9CA4498039D2CFB152E4685727497351FB60F11A2B"
+              }
+            ]
+          },
+          {
+            "mod_id": "STS2-RitsuLib",
+            "version_display": "0.6.7",
+            "files": [
+              {
+                "relative_path": "compat/0.111.0/STS2-RitsuLib.dll",
+                "sha256": "DB62D08E44DF951F1CA5A10FC720EDCF2102401583EA04B8C493AD4EEECA2427"
+              },
+              {
+                "relative_path": "compat/0.111.0/STS2-RitsuLib.Runtime.dll",
+                "sha256": "7A77583AF80792213C8DCD7572040A342E7EA0DBED7BBBC8ED8E20776445DCCF"
+              },
+              {
+                "relative_path": "shared/STS2-RitsuLib.Shared.dll",
+                "sha256": "6FEF35E9BD8F39852CC81E6A800128AF572DF312356B565815910B7A0BEF13D7"
+              },
+              {
+                "relative_path": "shared/STS2-RitsuLib.Settings.dll",
+                "sha256": "3A48B5A62E0FFA01C8527686B40AB16FF4B0B87D969AC6A20A3141BC7C7867E4"
+              },
+              {
+                "relative_path": "shared/STS2-RitsuLib.Ui.dll",
+                "sha256": "AC02253F9F4ACEAC0DEFAFF27C8AA7B10201A8B164FB8FEBE6CDA1C43294D19E"
+              }
+            ]
+          }
+        ],
+        "excluded_mod_ids": []
+      }
+    ],
+    "unknown_version_policy": "block_install"
+  },
+  "detection": {
+    "signals": [],
+    "installed_fingerprints": [
+      {
+        "mod_id": "RayCoopCompatibilityFix",
+        "relative_path": "RayCoopCompatibilityFix.dll",
+        "sha256": "A4316DD36F711E559FA13B683F1FF3E3981480F99870771D33B61AE612EDE3DC"
+      },
+      {
+        "mod_id": "RayCoopCompatibilityFix",
+        "relative_path": "RayCoopCompatibilityFix.json",
+        "sha256": "7382AB9A8A69C876F09777F551F1FDC24629795992ACD975B858A211EDD077FD"
+      }
+    ],
+    "installation_state_scope": "file_state_only"
+  },
+  "changes": {
+    "description": [
+      "延迟抽牌转换入口按 IsOverOrEnding 拒绝结束后的状态补发，正常战斗保留原逻辑。",
+      "白鲸下无显式目标的莱伊攻击使用同步 CombatTargets 随机流选择目标，保留原 CardPlay 对象。",
+      "无敌人不进行目标抽取；已有目标、其他角色不走本分支。",
+      "运行前校验内嵌精确哈希，安装失败撤销本补丁钩子。"
+    ],
+    "gameplay_impact": "保留正常抽牌转换；莱伊与白鲸组合从空引用改为一次同步随机目标选择。不会屏蔽不同步校验。",
+    "files": [
+      {
+        "mod_id": "RayCoopCompatibilityFix",
+        "relative_path": "RayCoopCompatibilityFix.dll",
+        "purpose": "独立修复程序集及兼容基线。"
+      },
+      {
+        "mod_id": "RayCoopCompatibilityFix",
+        "relative_path": "RayCoopCompatibilityFix.json",
+        "purpose": "游戏模组加载清单。"
+      }
+    ]
+  },
+  "relationships": {
+    "requires_patches": [],
+    "requires_when_mod_present": [],
+    "conflicts_patch_ids": [],
+    "supersedes_patch_ids": []
+  },
+  "multiplayer": {
+    "policy": "all_players",
+    "explanation": "所有联机玩家安装同一补丁与匹配原模组，并重启后再联机。",
+    "restart_required": true
+  },
+  "saved_runs": {
+    "support": "unknown",
+    "explanation": "本轮未验证所有已有存档和游戏场景。"
+  },
+  "validation": [
+    {
+      "kind": "code_review",
+      "result": "pass",
+      "summary": "实际 DLL、9 次差异记录及空目标堆栈核对；异步根因仅部分确认。",
+      "date": "2026-11-05"
+    },
+    {
+      "kind": "automated",
+      "result": "pass",
+      "summary": "真实 DLL 的 Harmony 安装及哈希守卫、结束/正常战斗分支、100 次同种子选目标、空目标零 RNG、已有目标保留；引擎边界隔离。",
+      "date": "2026-11-05"
+    },
+    {
+      "kind": "local_game",
+      "result": "partial",
+      "summary": "当前整套模组无界面限帧启动，新增补丁初始化成功；未进入战斗。",
+      "date": "2026-11-05"
+    },
+    {
+      "kind": "multiplayer",
+      "result": "not_run",
+      "summary": "未进行修复后的真人双机战斗。",
+      "date": null
+    }
+  ],
+  "limitations": [
+    "只支持列明的文件哈希；版本号相同但 DLL 不同仍拒绝安装。",
+    "首次 #697 的 OverMountain 牌堆／升级差异未定位，不在已解决范围。",
+    "8 次延迟抽牌差异的完整异步调用链未被日志捕获，此项是针对性边界防护。",
+    "未完成真人双机和完整对局验证；启动或文件匹配不代表全部不同步已经解决。"
+  ],
+  "rollback": {
+    "supported": true,
+    "description": "在支持本批补丁的管理器中检查最近一次回滚，再确认撤销该安装批次；未知后续文件或损坏备份会停止回滚。不更改存档。"
+  },
+  "distribution": {
+    "package_url": "https://github.com/3462387900-hub/sts2-patches/releases/download/v2026.11.05.1/RayCoopCompatibilityFix-1.0.0.zip",
+    "package_sha256": "9E12EF1D58C91716035438656FBCCB656678224044D676433254F1A0B06B5D72",
+    "recipe_url": "https://github.com/3462387900-hub/sts2-patches/releases/download/v2026.11.05.1/RayCoopCompatibilityFix-1.0.0.recipe.json",
+    "recipe_sha256": "923DC4F7980DD4416E86B15DA9CAE05DED3D874EF72DF345763F9E47350487CA"
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-05",
+      "changes": [
+        "新增结束战斗延迟抽牌防护及莱伊白鲸目标兼容。",
+        "通过管理器选择安装、联机对齐和按批次回滚，不提供独立 CMD 安装器。"
+      ]
+    }
+  ]
+}

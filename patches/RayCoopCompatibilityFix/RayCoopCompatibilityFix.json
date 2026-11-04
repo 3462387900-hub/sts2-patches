@@ -1,0 +1,25 @@
+{
+  "id": "RayCoopCompatibilityFix",
+  "name": "莱伊联机结算兼容修复",
+  "author": "Local compatibility fixes",
+  "version": "1.0.0",
+  "description": "战斗结束后的延迟抽牌防护；白鲸药水下莱伊单体攻击同步选定目标。全员安装并重启。",
+  "min_game_version": "0.111.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [
+    {
+      "id": "Ray"
+    },
+    {
+      "id": "AK_Exusiai"
+    },
+    {
+      "id": "HextechRunes"
+    },
+    {
+      "id": "STS2-RitsuLib"
+    }
+  ]
+}

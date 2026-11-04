@@ -3,14 +3,14 @@ from pathlib import Path
 import hashlib,json,zipfile
 import notice_tool
 ROOT=Path(__file__).resolve().parents[1]
-NAME='STS2-Manager-Payload-20261102-v3'
+NAME='STS2-Manager-Payload-20261105-v4'
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 def data(d):return (json.dumps(d,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
 def sha(b):return hashlib.sha256(b).hexdigest().upper()
 def main():
  plan=read(ROOT/'manager-plan.json');index=read(ROOT/'index.json');schema=read(ROOT/'tools/patch.schema.json')
  components={c['id']:c for c in plan['components']}
- assert len(components)==len(index['entries'])==17
+ assert len(components)==len(index['entries'])==18
  script=(ROOT/'installer/Common.ps1').read_text(encoding='utf-8-sig').replace('Installed 11-component fix bundle;','Installed selected patch files;')
  files={'Common.ps1':b'\xef\xbb\xbf'+script.encode('utf-8')}
  ids={e['id'] for e in index['entries']}
@@ -42,7 +42,7 @@ def main():
  out=ROOT/'dist';out.mkdir(exist_ok=True);archive=out/(NAME+'.zip')
  with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
   for name,b in sorted(files.items()):
-   info=zipfile.ZipInfo(NAME+'/'+name,(2026,11,2,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;z.writestr(info,b)
+   info=zipfile.ZipInfo(NAME+'/'+name,(2026,11,5,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;z.writestr(info,b)
  with zipfile.ZipFile(archive) as z:
   assert z.testzip() is None
   assert not any(n.lower().endswith('.cmd') for n in z.namelist())

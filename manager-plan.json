@@ -1,5 +1,5 @@
 {
-  "version": "20261102.3",
+  "version": "20261105.1",
   "gameVersion": "0.111.0",
   "components": [
     {
@@ -851,6 +851,30 @@
           "sha256": "7A940D018EDEC869D25A3AA6FA47B41AFD0B3A02A05383132C5D8DF4D837605C",
           "allowedExisting": [
             "7A940D018EDEC869D25A3AA6FA47B41AFD0B3A02A05383132C5D8DF4D837605C"
+          ],
+          "isManifest": true
+        }
+      ]
+    },
+    {
+      "id": "RayCoopCompatibilityFix",
+      "required": false,
+      "files": [
+        {
+          "name": "RayCoopCompatibilityFix.dll",
+          "source": "payload/RayCoopCompatibilityFix/RayCoopCompatibilityFix.dll",
+          "sha256": "A4316DD36F711E559FA13B683F1FF3E3981480F99870771D33B61AE612EDE3DC",
+          "allowedExisting": [
+            "A4316DD36F711E559FA13B683F1FF3E3981480F99870771D33B61AE612EDE3DC"
+          ],
+          "isManifest": false
+        },
+        {
+          "name": "RayCoopCompatibilityFix.json",
+          "source": "payload/RayCoopCompatibilityFix/RayCoopCompatibilityFix.json",
+          "sha256": "7382AB9A8A69C876F09777F551F1FDC24629795992ACD975B858A211EDD077FD",
+          "allowedExisting": [
+            "7382AB9A8A69C876F09777F551F1FDC24629795992ACD975B858A211EDD077FD"
           ],
           "isManifest": true
         }

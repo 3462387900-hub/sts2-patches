@@ -5,3 +5,6 @@
 *.ps1 -text
 *.cmd -text
 patches/** -text
+
+# Embedded runtime baseline bytes are part of the released DLL identity.
+src/RayCoopCompatibilityFix/baseline.json -text

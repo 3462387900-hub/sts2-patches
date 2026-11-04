@@ -85,6 +85,11 @@
       "id": "local.neowoptionorderfix",
       "component_id": "NeowOptionOrderFix",
       "metadata": "patches/NeowOptionOrderFix/patch-info/patch.json"
+    },
+    {
+      "id": "local.raycoopcompatibilityfix",
+      "component_id": "RayCoopCompatibilityFix",
+      "metadata": "patches/RayCoopCompatibilityFix/patch-info/patch.json"
     }
   ]
 }
